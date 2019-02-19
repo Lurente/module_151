@@ -82,7 +82,7 @@
                                     <input type="email" name="email" value=""><br>
                                     <label for="password">Mot de passe :</label><br>
                                     <input type="password" name="password" value=""><br>
-                                    <input type="submit" name="" value="send">
+                                    <input type="button" onclick="checkFieldsLogin()" value="Login">
                                   </form>
                             </div>
                           <!-- /collumn -->
@@ -97,7 +97,7 @@
                                     <input type="password" name="password" value=""><br>
                                     <label for="confirm-password">Confirmez mot de passe :</label><br>
                                     <input type="password" name="confirm-password" value="">
-                                    <input type="submit" name="" value="send">
+                                    <input type="button" onclick="checkFieldsSingin()" value="Sign-in">
                                   </form>
                             </div>
                           <!-- /collumn -->
@@ -162,6 +162,52 @@
         </div>
       <!--/mainPage-->
       <!--scripts-->
+      <script>
+    		// fonction javascript qui permet de recevoir un id, mettre à jour le champs du formulaire de suppression
+    		// et poster le formulaire de suppression
+    		function checkFieldsLogin()
+    		{
+    			var formCheck = true;
+
+    			if (document.getElementById('email').value == '') {
+    				document.getElementById('email').style.backgroundColor = 'red';
+    				formCheck = false;
+    			}
+
+    			if (document.getElementById('password').value == '') {
+    				document.getElementById('password').style.backgroundColor = 'red';
+    				formCheck = false;
+    			}
+
+    			if (formCheck) {
+    				document.getElementById('LoginForm').submit();
+    			}
+    		}
+
+        function checkFieldsSingin()
+    		{
+    			var formCheck = true;
+
+    			if (document.getElementById('email').value == '') {
+    				document.getElementById('email').style.backgroundColor = 'red';
+    				formCheck = false;
+    			}
+
+    			if (document.getElementById('password').value == '') {
+    				document.getElementById('password').style.backgroundColor = 'red';
+    				formCheck = false;
+    			}
+
+    			if (document.getElementById('confirm-password').value == '') {
+    				document.getElementById('confirm-password').style.backgroundColor = 'red';
+    				formCheck = false;
+    			}
+
+    			if (formCheck) {
+    				document.getElementById('Sign-inForm').submit();
+    			}
+    		}
+    	</script>
         <script>
           function openTab(evt, onglet) {
               var i, content, tab;
