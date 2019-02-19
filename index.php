@@ -70,7 +70,6 @@
                     <div class="row">
                         <div class="col-md-12">
                             <p>Welcome to <a href="#">GAMEOLOGY </a>!</p> <br>
-                            <p>Last games added :</p>
                         </div>
                     </div>
                 </div>
@@ -81,39 +80,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <div id="gameCarousel" class="carousel slide" data-ride="carousel">
 
-                            <!-- Indicators -->
-                                <ol class="carousel-indicators">
-                                    <li data-target="#gameCarousel" data-slide-to="0" class="active"></li>
-                                    <li data-target="#gameCarousel" data-slide-to="1"></li>
-                                    <li data-target="#gameCarousel" data-slide-to="2"></li>
-                                </ol>
-
-                                <div class="carousel-inner">
-                                    <div class="item active">
-                                        <img src="images/gallery_10.jpg" alt="">
-                                    </div>
-
-                                    <div class="item">
-                                        <img src="images/gallery-8.jpg" alt="">
-                                    </div>
-
-                                    <div class="item">
-                                        <img src="images/gallery_7.jpg" alt="">
-                                    </div>
-                                </div>
-
-                                <!-- controls -->
-                                <a class="left carousel-control" href="#gameCarousel" data-slide="prev">
-                                    <span class="glyphicon glyphicon-chevron-left"></span>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                                <a class="right carousel-control" href="#gameCarousel" data-slide="next">
-                                    <span class="glyphicon glyphicon-chevron-right"></span>
-                                    <span class="sr-only">Next</span>
-                                </a>
-                            </div>
                         </div>
                     </div>
                 </div>
