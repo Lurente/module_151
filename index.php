@@ -77,11 +77,12 @@
                           <!-- #collumn -->
                             <div id="onglet1" class="content">
                                   <h2>login</h2>
-                                  <form class="LoginForm" action="index.html" method="post">
+                                  <form class="LoginForm" action="traitemnet.php" method="post">
                                     <label for="email">Adresse mail:</label><br>
                                     <input type="email" name="email" value=""><br>
                                     <label for="password">Mot de passe :</label><br>
                                     <input type="password" name="password" value=""><br>
+                                    <input type="submit" name="" value="send">
                                   </form>
                             </div>
                           <!-- /collumn -->
@@ -96,6 +97,7 @@
                                     <input type="password" name="password" value=""><br>
                                     <label for="confirm-password">Confirmez mot de passe :</label><br>
                                     <input type="password" name="confirm-password" value="">
+                                    <input type="submit" name="" value="send">
                                   </form>
                             </div>
                           <!-- /collumn -->
