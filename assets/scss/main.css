@@ -3,40 +3,39 @@
 Générique
 */
 body {
-  font-family: 'Russo One', sans-serif;
-  background-color: #454c52;
-  color: #fff; }
+  font-family: 'Cabin Sketch', cursive;
+  background-color: #fff;
+  color: #000; }
 
 .nav {
   z-index: 999; }
   .nav nav {
     line-height: 15vh;
     background-color: transparent;
-    text-align: center;
     width: 100%; }
     .nav nav ul {
       list-style: none;
+      text-align: center;
       margin: 0;
       padding: 0;
       height: 15vh; }
       .nav nav ul li {
-        margin-left: 9vh;
         display: inline-block; }
         .nav nav ul li a {
           text-decoration: none;
-          padding: 0 0.2vh;
+          margin: 0 5vh;
           font-size: 2.5vh;
           font-weight: lighter;
           text-align: center; }
         .nav nav ul li a:link, .nav nav ul li a:visited, .nav nav ul li a:active {
-          color: #fff; }
+          color: #000; }
         .nav nav ul li a:hover, .nav nav ul li a:focus {
-          border-bottom: 0.3vh #72b53c solid; }
+          border-bottom: 0.3vh #525252 solid; }
         .nav nav ul li a#current {
-          color: #72b53c; }
+          color: #525252;
+          border-bottom: 0.3vh #525252 solid; }
         .nav nav ul li a#current:hover {
-          color: #72b53c;
-          border-bottom: 0.3vh #fff solid; }
+          color: #525252; }
 
 .footer {
   padding-top: 30px;
@@ -44,52 +43,58 @@ body {
   margin-top: 100px;
   width: 100%;
   border-top: 1px solid #ababab; }
-  .footer .col-md-3 {
+  .footer .col-md-2 {
     line-height: 15vh; }
-    .footer .col-md-3 .logo_footer {
+    .footer .col-md-2 .logo_footer {
       width: 10vh;
       height: 10vh; }
-  .footer .col-md-9 {
+  .footer #right_logo_footer {
+    text-align: right;
+    line-height: 15vh; }
+    .footer #right_logo_footer .logo_footer {
+      width: 10vh;
+      height: 10vh; }
+  .footer .col-md-8 {
     text-align: center;
     margin: auto; }
-    .footer .col-md-9 .foot_nav {
+    .footer .col-md-8 .foot_nav {
       line-height: 15vh;
       background-color: transparent;
       text-align: left; }
-      .footer .col-md-9 .foot_nav ul {
+      .footer .col-md-8 .foot_nav ul {
         list-style: none;
         margin: 0;
-        padding: 0; }
-        .footer .col-md-9 .foot_nav ul li {
+        padding: 0;
+        text-align: center; }
+        .footer .col-md-8 .foot_nav ul li {
           display: inline-block; }
-          .footer .col-md-9 .foot_nav ul li a {
+          .footer .col-md-8 .foot_nav ul li a {
+            font-size: 24px;
             margin-top: 9px;
-            margin-left: 30px;
-            color: #fff;
+            margin: 0 2vh;
+            color: #000;
             text-decoration: none;
             line-height: inherit;
             display: block;
             text-align: center; }
-          .footer .col-md-9 .foot_nav ul li p {
-            font-weight: bold;
-            margin-left: 60px; }
-          .footer .col-md-9 .foot_nav ul li .ref {
-            font-size: 24px; }
 
-.page-homepage .header .pageTitle {
-  text-align: center; }
-  .page-homepage .header .pageTitle h1 {
-    color: #ffffff;
-    font-family: 'Russo One', sans-serif;
-    font-size: 9vh; }
 .page-homepage .header .col-md-12 {
   text-align: center; }
   .page-homepage .header .col-md-12 #logo {
+    margin-bottom: 4vh;
     width: 75vh;
     height: 75vh; }
-.page-homepage .introduction .col-md-12 p {
+.page-homepage .header .pageTitle {
+  text-align: center; }
+  .page-homepage .header .pageTitle h1 {
+    color: #000;
+    font-family: 'Cabin Sketch', cursive;
+    font-size: 9vh; }
+.page-homepage .introduction p {
   font-size: 26px; }
-  .page-homepage .introduction .col-md-12 p a {
-    color: #fff; }
+  .page-homepage .introduction p a {
+    color: #000; }
+.page-homepage .introduction .connexion {
+  text-align: center; }
 
 /*# sourceMappingURL=main.css.map */

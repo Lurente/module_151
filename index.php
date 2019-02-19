@@ -11,14 +11,13 @@
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <title>Gameology - HOMEPAGE</title>
+      <title>Doodle War - HOMEPAGE</title>
       <meta name="description" content="Description de la page" />
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
       <link rel="stylesheet" href="assets/scss/main.css">
-      <link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">
-      <link href="https://fonts.googleapis.com/css?family=Russo+One" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Cabin+Sketch" rel="stylesheet">
     </head>
     <body>
       <!--mainPage-->
@@ -28,13 +27,13 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <img src="images/Gameology_logo.png" alt="logo Gameology" id="logo" >
+                            <img src="images/doodle_war_logo.png" alt="logo Gameology" id="logo" >
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="pageTitle">
-                                <h1>GAMEOLOGY</h1>
+                                <h1>DOODLE WAR</h1>
                             </div>
                         </div>
                     </div>
@@ -68,8 +67,38 @@
             <div class="introduction">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-12">
-                            <p>Welcome to <a href="#">GAMEOLOGY </a>!</p> <br>
+                        <p>Welcome to <a href="#">DOODLE WAR </a>!</p> <br>
+                        <p>Please Login or Sign-in</p>
+                        <div class="connexion">
+                          <div class="tab" >
+                            <button class="onglet" onclick="openTab(event, 'onglet1')" id="default">login</button>
+                            <button class="onglet" onclick="openTab(event, 'onglet2')">sign-in</button>
+                          </div>
+                          <!-- #collumn -->
+                            <div id="onglet1" class="content">
+                                  <h2>login</h2>
+                                  <form class="LoginForm" action="index.html" method="post">
+                                    <label for="email">Adresse mail:</label><br>
+                                    <input type="email" name="email" value=""><br>
+                                    <label for="password">Mot de passe :</label><br>
+                                    <input type="password" name="password" value=""><br>
+                                  </form>
+                            </div>
+                          <!-- /collumn -->
+
+                          <!-- #collumn -->
+                            <div id="onglet2" class="content">
+                                  <h2>Sign-in</h2>
+                                  <form class="Sign-inForm" action="index.html" method="post">
+                                    <label for="email">Adresse mail:</label><br>
+                                    <input type="email" name="email" value=""><br>
+                                    <label for="password">Mot de passe :</label><br>
+                                    <input type="password" name="password" value=""><br>
+                                    <label for="confirm-password">Confirmez mot de passe :</label><br>
+                                    <input type="password" name="confirm-password" value="">
+                                  </form>
+                            </div>
+                          <!-- /collumn -->
                         </div>
                     </div>
                 </div>
@@ -91,13 +120,13 @@
               <div class="container">
                   <div class="row">
                       <!--#collumn-->
-                      <div class="col-md-3">
-                          <a href="index.html"><img class="logo_footer" src="images/Gameology_logo.png"></a>
+                      <div class="col-md-2">
+                          <a href="index.html"><img class="logo_footer" src="images/doodle_war_logo.png"></a>
                       </div>
                       <!--/collumn-->
 
                       <!--#collumn-->
-                      <div class="col-md-9">
+                      <div class="col-md-8">
                         <div class="foot_nav">
                           <ul>
                               <li>
@@ -118,6 +147,11 @@
                           </ul>
                         </div>
                       </div>
+                      <!--#collumn-->
+                      <div class="col-md-2" id="right_logo_footer">
+                          <a href="index.html"><img class="logo_footer" src="images/doodle_war_logo.png"></a>
+                      </div>
+                      <!--/collumn-->
 
                   </div>
               </div>
@@ -125,5 +159,23 @@
           <!-- /footer -->
         </div>
       <!--/mainPage-->
+      <!--scripts-->
+        <script>
+          function openTab(evt, onglet) {
+              var i, content, tab;
+              content = document.getElementsByClassName("content");
+              for (i = 0; i < content.length; i++) {
+                  content[i].style.display = "none";
+              }
+              tab = document.getElementsByClassName("onglet");
+              for (i = 0; i < tab.length; i++) {
+                  tab[i].className = tab[i].className.replace(" active", "");
+              }
+              document.getElementById(onglet).style.display = "block";
+              evt.currentTarget.className += " active";
+          }
+        document.getElementById("default").click();
+        </script>
+      <!--/scripts-->
     </body>
 </html>
