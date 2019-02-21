@@ -77,12 +77,13 @@
                           <!-- #collumn -->
                             <div id="onglet1" class="content">
                                   <h2>login</h2>
-                                  <form class="LoginForm" action="traitemnet.php" method="post">
+                                  <form id="LoginForm" action="traitement.php" method="post">
                                     <label for="email">Adresse mail:</label><br>
-                                    <input type="email" name="email" value=""><br>
+                                    <input type="email" id="email" name="email" value=""><br>
                                     <label for="password">Mot de passe :</label><br>
-                                    <input type="password" name="password" value=""><br>
-                                    <input type="button" onclick="checkFieldsLogin()" value="Login">
+                                    <input type="password" id="password" name="password" value=""><br>
+                                    <input type="button" name="login" onclick="checkFieldsLogin()" value="Login">
+                                    <input type="hidden" name="" value="">
                                   </form>
                             </div>
                           <!-- /collumn -->
@@ -90,14 +91,16 @@
                           <!-- #collumn -->
                             <div id="onglet2" class="content">
                                   <h2>Sign-in</h2>
-                                  <form class="Sign-inForm" action="index.html" method="post">
+                                  <form id="Sign-inForm" action="traitement.php" method="post">
                                     <label for="email">Adresse mail:</label><br>
-                                    <input type="email" name="email" value=""><br>
+                                    <input type="email" id="email" name="email" value=""><br>
+                                    <label for="pseudo">Pseudo:</label><br>
+                                    <input type="pseudo" id="pseudo" name="pseudo" value=""><br>
                                     <label for="password">Mot de passe :</label><br>
-                                    <input type="password" name="password" value=""><br>
+                                    <input type="password" id="password" name="password" value=""><br>
                                     <label for="confirm-password">Confirmez mot de passe :</label><br>
-                                    <input type="password" name="confirm-password" value="">
-                                    <input type="button" onclick="checkFieldsSingin()" value="Sign-in">
+                                    <input type="password" id="confirm-password" name="confirm-password" value="">
+                                    <input type="button" name="signIn" onclick="checkFieldsSingin()" value="Sign-in">
                                   </form>
                             </div>
                           <!-- /collumn -->
@@ -207,6 +210,9 @@
     				document.getElementById('Sign-inForm').submit();
     			}
     		}
+        function login(){
+          document.getElementById
+        }
     	</script>
         <script>
           function openTab(evt, onglet) {
