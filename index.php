@@ -126,7 +126,7 @@
                                   This email is already taken ! Please chose another one or try to login with it !
                               </div>
                               <div class="col-md-2">
-                                <button type="button" id="emailalert" onclick="hideemailalert()">x</button>
+                                <button type="button" id="emailalert" onclick="hideEmailAlert()">x</button>
                               </div>
                             </div>
                           </div>
@@ -244,7 +244,7 @@
     			}
     		}
 
-        function hideemailalert(){
+        function hideEmailAlert(){
           document.getElementById('emailalert').style.display ="none";
         }
 
