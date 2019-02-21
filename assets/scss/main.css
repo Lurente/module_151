@@ -89,17 +89,18 @@ body {
     color: #000;
     font-family: 'Cabin Sketch', cursive;
     font-size: 9vh; }
-.page-homepage .introduction {
-  margin-bottom: 100px; }
-  .page-homepage .introduction p {
-    font-size: 26px; }
-    .page-homepage .introduction p a {
-      color: #000; }
-  .page-homepage .introduction .alert {
-    margin-top: 5vh;
-    text-align: center;
-    width: 100%; }
-  .page-homepage .introduction .connexion {
+.page-homepage .introduction p {
+  font-size: 26px; }
+  .page-homepage .introduction p a {
+    color: #000; }
+.page-homepage .introduction .connexion {
+  text-align: center; }
+.page-homepage .alert {
+  width: 100%;
+  display: inline-block; }
+  .page-homepage .alert .col-md-8 {
     text-align: center; }
+  .page-homepage .alert .col-md-2 {
+    text-align: right; }
 
 /*# sourceMappingURL=main.css.map */

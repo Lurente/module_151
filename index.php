@@ -1,4 +1,4 @@
-<?php
+"<?php
     /*
     Page name : index.php
       Description : main page of the website
@@ -71,25 +71,11 @@
                         <p>Please Login or Sign-in</p>
                         <div class="connexion">
                           <div class="tab" >
-                            <button class="onglet" onclick="openTab(event, 'onglet1')" id="default">login</button>
-                            <button class="onglet" onclick="openTab(event, 'onglet2')">sign-in</button>
+                            <button class="onglet" onclick="openTab(event, 'onglet1')" id="default">sign-in</button>
+                            <button class="onglet" onclick="openTab(event, 'onglet2')">login</button>
                           </div>
                           <!-- #collumn -->
                             <div id="onglet1" class="content">
-                                  <h2>login</h2>
-                                  <form id="LoginForm" action="traitement.php" method="post">
-                                    <label for="email">Adresse mail ou pseudo :</label><br>
-                                    <input type="email" id="email" name="email" value=""><br>
-                                    <label for="password">Mot de passe :</label><br>
-                                    <input type="password" id="password" name="password" value=""><br><br>
-                                    <input type="button" onclick="checkFieldsLogin()" value="Login">
-                                    <input type="number" name="login" value="1" hidden>
-                                  </form>
-                            </div>
-                          <!-- /collumn -->
-
-                          <!-- #collumn -->
-                            <div id="onglet2" class="content">
                                   <h2>Sign-in</h2>
                                   <form id="Sign-inForm" action="traitement.php" method="post">
                                     <input type="text" name="signIn" value="1" hidden >
@@ -103,23 +89,53 @@
                                     <input type="password" id="confirm-passwordSignin" name="confirm-password" >
                                     <input type="button" onclick="checkFieldsSingin()" value="Sign-in">
                                   </form>
-                                  <!--alert-->
-                                    <?php
-                                        if($error = 'emailtaken'){
-                                          echo "<div class='alert alert-danger' role='alert'>
-                                                  This email is already taken ! Please chose another one or try to login with it !
-                                                </div>";
-                                        }
-                                    ?>
-                                    <!--/alert-->
+                            </div>
+                          <!-- /collumn -->
+
+                          <!-- #collumn -->
+                            <div id="onglet2" class="content">
+                                  <h2>login</h2>
+                                  <form id="LoginForm" action="traitement.php" method="post">
+                                    <label for="email">Adresse mail ou pseudo :</label><br>
+                                    <input type="email" id="email" name="email" value=""><br>
+                                    <label for="password">Mot de passe :</label><br>
+                                    <input type="password" id="password" name="password" value=""><br><br>
+                                    <input type="button" onclick="checkFieldsLogin()" value="Login">
+                                    <input type="number" name="login" value="1" hidden>
+                                  </form>
                             </div>
                           <!-- /collumn -->
                         </div>
-
                     </div>
                 </div>
             </div>
           <!--/introduction-->
+
+          <!--alert-->
+          <div class="alert">
+              <?php
+              $error = isset($_GET['error'])?$_GET['error']:'';
+              if(!empty($error)){
+                if($error = "emailtaken"){
+                  echo '<div class="container" id=emailalert>
+                          <div class="row">
+                            <div class="alert alert-danger" role="alert">
+                              <div class="col-md-2">
+                              </div>
+                              <div class="col-md-8">
+                                  This email is already taken ! Please chose another one or try to login with it !
+                              </div>
+                              <div class="col-md-2">
+                                <button type="button" id="emailalert" onclick="hideemailalert()">x</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>';
+                }
+              }
+              ?>
+          </div>
+          <!--/alert-->
           <!--content-->
             <div class="content">
                 <div class="container">
@@ -228,6 +244,10 @@
     			}
     		}
 
+        function hideemailalert(){
+          document.getElementById('emailalert').style.display ="none";
+        }
+
         function openTab(evt, onglet) {
           var i, content, tab;
           content = document.getElementsByClassName("content");
@@ -242,7 +262,7 @@
           evt.currentTarget.className += " active";
         }
           document.getElementById("default").click();
-        </script>
+      </script>
 
     </body>
 </html>

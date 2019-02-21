@@ -117,22 +117,27 @@ body{
         }
     }
     .introduction{
-      margin-bottom: 100px;
             p{
                 font-size: 26px;
                 a{
                     color: #000;
                 }
             }
-            .alert {
-              margin-top: 5vh;
-              text-align: center;
-              width: 100%;
-              }
+
             .connexion{
               text-align: center;
               .onglet{
               }
             }
+    }
+    .alert{
+      width: 100%;
+      display: inline-block;
+      .col-md-8 {
+        text-align: center;
+      }
+      .col-md-2{
+        text-align: right;
+      }
     }
 }
