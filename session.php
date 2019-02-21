@@ -1,4 +1,5 @@
 <?php
+session_start()
     /*
     Page name : index.php
       Description : main page of the website
@@ -11,7 +12,7 @@
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <title>Doodle War - HOMEPAGE</title>
+      <title>Doodle War - SESSION</title>
       <meta name="description" content="Description de la page" />
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -78,12 +79,11 @@
                             <div id="onglet1" class="content">
                                   <h2>login</h2>
                                   <form id="LoginForm" action="traitement.php" method="post">
-                                    <label for="email">Adresse mail ou pseudo :</label><br>
+                                    <label for="email">Adresse mail:</label><br>
                                     <input type="email" id="email" name="email" value=""><br>
                                     <label for="password">Mot de passe :</label><br>
-                                    <input type="password" id="password" name="password" value=""><br><br>
-                                    <input type="button" onclick="checkFieldsLogin()" value="Login">
-                                    <input type="number" name="login" value="1" hidden>
+                                    <input type="password" id="password" name="password" value=""><br>
+                                    <input type="button" name="login" onclick="checkFieldsLogin()" value="Login">
                                   </form>
                             </div>
                           <!-- /collumn -->
@@ -92,30 +92,19 @@
                             <div id="onglet2" class="content">
                                   <h2>Sign-in</h2>
                                   <form id="Sign-inForm" action="traitement.php" method="post">
-                                    <input type="text" name="signIn" value="1" hidden >
                                     <label for="email">Adresse mail:</label><br>
                                     <input type="email" id="emailSignin" name="email" value=""><br>
                                     <label for="pseudo">Pseudo:</label><br>
-                                    <input type="text" id="pseudoSignin" name="pseudo" value=""><br>
+                                    <input type="pseudo" id="pseudoSignin" name="pseudo" value=""><br>
                                     <label for="password">Mot de passe :</label><br>
                                     <input type="password" id="passwordSignin" name="password" value=""><br>
                                     <label for="confirm-password">Confirmez mot de passe :</label><br>
-                                    <input type="password" id="confirm-passwordSignin" name="confirm-password" >
-                                    <input type="button" onclick="checkFieldsSingin()" value="Sign-in">
+                                    <input type="password" id="confirm-passwordSignin" name="confirm-password" value="">
+                                    <input type="button" name="signIn" onclick="checkFieldsSingin()" value="Sign-in">
                                   </form>
-                                  <!--alert-->
-                                    <?php
-                                        if($error = 'emailtaken'){
-                                          echo "<div class='alert alert-danger' role='alert'>
-                                                  This email is already taken ! Please chose another one or try to login with it !
-                                                </div>";
-                                        }
-                                    ?>
-                                    <!--/alert-->
                             </div>
                           <!-- /collumn -->
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -194,6 +183,7 @@
     			}
 
     			if (formCheck) {
+            document.getElementById("login").set("value","login");
     				document.getElementById('LoginForm').submit();
     			}
     		}
@@ -207,16 +197,15 @@
     				formCheck = false;
     			}
 
-          if (document.getElementById('pseudoSignin').value == '') {
-    				document.getElementById('pseudoSignin').style.backgroundColor = 'red';
-    				formCheck = false;
-    			}
-
     			if (document.getElementById('passwordSignin').value == '') {
     				document.getElementById('passwordSignin').style.backgroundColor = 'red';
     				formCheck = false;
     			}
 
+          if (document.getElementById('pseudoSignin').value == '') {
+    				document.getElementById('pseudoSignin').style.backgroundColor = 'red';
+    				formCheck = false;
+    			}
 
     			if (document.getElementById('confirm-passwordSignin').value == '') {
     				document.getElementById('confirm-passwordSignin').style.backgroundColor = 'red';
@@ -224,25 +213,30 @@
     			}
 
     			if (formCheck) {
+            document.getElementById("signIn").set("value","signIn");
     				document.getElementById('Sign-inForm').submit();
     			}
     		}
-
-        function openTab(evt, onglet) {
-          var i, content, tab;
-          content = document.getElementsByClassName("content");
-          for (i = 0; i < content.length; i++) {
-              content[i].style.display = "none";
-          }
-          tab = document.getElementsByClassName("onglet");
-          for (i = 0; i < tab.length; i++) {
-              tab[i].className = tab[i].className.replace(" active", "");
-          }
-          document.getElementById(onglet).style.display = "block";
-          evt.currentTarget.className += " active";
+        function login(){
+          document.getElementById
         }
-          document.getElementById("default").click();
+    	</script>
+        <script>
+          function openTab(evt, onglet) {
+              var i, content, tab;
+              content = document.getElementsByClassName("content");
+              for (i = 0; i < content.length; i++) {
+                  content[i].style.display = "none";
+              }
+              tab = document.getElementsByClassName("onglet");
+              for (i = 0; i < tab.length; i++) {
+                  tab[i].className = tab[i].className.replace(" active", "");
+              }
+              document.getElementById(onglet).style.display = "block";
+              evt.currentTarget.className += " active";
+          }
+        document.getElementById("default").click();
         </script>
-
+      <!--/scripts-->
     </body>
 </html>

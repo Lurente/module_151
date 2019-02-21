@@ -3,73 +3,80 @@
 
   require_once('includes/config.php');
 
+  $email = isset($_POST['email'])?$_POST['email']:'';
+  $pseudo = isset($_POST['pseudo'])?$_POST['pseudo']:'';
+  $password = isset($_POST['password'])?$_POST['password']:'';
+  $encryptedpassword = md5($password);
 
-  $usrLogin = isset($_POST['email'])?$_POST['email']:'';
-  $usrPasword = isset($_POST['password'])?$_POST['password']:'';
+  echo "<pre>";
+  print_r($_POST);
+  echo "</pre>";
 
-    if(isset($_POST['login'])){
-      try
-      {
-      	// préparation de la requete préparée (Prepared Statment)
-      	$requete = "SELECT * FROM utilisateur WHERE pseudo=? AND password=?";
-      	$stmt = $db->prepare($requete);
-      	$stmt->bindParam(1, $usrLogin);
-      	$stmt->bindParam(2, md5($usrPasword));   // ATTENTION on bind en convertissant en MD5 ce qui est reçu
+  if(isset($_POST['signIn'])){
+    try
+    {
+      echo "signIn";
+      // préparation de la requete préparée (Prepared Statment)
+      $stmt = $db->query("SELECT email FROM compte WHERE email = '$email'");
 
-      	$stmt->execute();
+      $result = $stmt->fetch(PDO::FETCH_OBJ);
 
-      	if ($stmt->rowCount() > 0) {
-      		// login effectué avec succès ! on a trouvé un utilisateur correspondant
-      		// mise en session
-      		$curUsr = $stmt->fetch(PDO::FETCH_OBJ);
-      		$_SESSION['usr_id'] = $curUsr->id_utilisateur;
-      		$_SESSION['usr_nom_prenom'] = $curUsr->nom_utilisateur . ' ' . $curUsr->prenom_utilisateur;
-      		$_SESSION['usr_level'] = $curUsr->level_utilisateur;
+      if ($result->email != $email) {
+        $requete = $db->prepare("INSERT INTO compte (email, pseudo, password) VALUES (:email, :pseudo, :password)" );
 
-      		header('location:etudiant_liste.php');
-      	}
-      	else
-      	{
-      		// erreur de login, pas trouvé d'utilisateur...on repart sur le login...
-      		header('location:login.php?msg=1');
-      	}
+          $requete->bindParam(":email", $email);
+          $requete->bindParam(":pseudo", $pseudo);
+          $requete->bindParam(":password", $encryptedpassword);
+
+          $requete->execute();
+
+          header('location:index.php');
       }
-      catch(PDOException $e)
+      else
       {
-      	die('Une erreur est survenue ! ' . $e->getMessage());
+        header('location:index.php?error="emailtaken"');
       }
+
     }
-
-    if(isset($_POST['signIn'])){
-      try
-      {
-      	// préparation de la requete préparée (Prepared Statment)
-      	$requete = "INSERT INTO 'compte' (`email`, `pseudo`, `password`) VALUES ($_POST['email'], $_POST['pseudo'], $_POST['password']);";
-      	$stmt = $db->prepare($requete);
-      	$stmt->bindParam(1, $usrLogin);
-      	$stmt->bindParam(2, md5($usrPasword));   // ATTENTION on bind en convertissant en MD5 ce qui est reçu
-
-      	$stmt->execute();
-
-      	if ($stmt->rowCount() > 0) {
-      		// login effectué avec succès ! on a trouvé un utilisateur correspondant
-      		// mise en session
-      		$curUsr = $stmt->fetch(PDO::FETCH_OBJ);
-      		$_SESSION['usr_id'] = $curUsr->id_utilisateur;
-      		$_SESSION['usr_nom_prenom'] = $curUsr->nom_utilisateur . ' ' . $curUsr->prenom_utilisateur;
-      		$_SESSION['usr_level'] = $curUsr->level_utilisateur;
-
-      		header('location:etudiant_liste.php');
-      	}
-      	else
-      	{
-      		// erreur de login, pas trouvé d'utilisateur...on repart sur le login...
-      		header('location:login.php?msg=1');
-      	}
-      }
-      catch(PDOException $e)
-      {
-      	die('Une erreur est survenue ! ' . $e->getMessage());
-      }
+    catch(PDOException $e){
+      die('Une erreur est survenue ! ' . $e->getMessage());
     }
+  }
+
+  if(isset($_POST['login']))
+  {
+    try
+    {
+    	// préparation de la requete préparée (Prepared Statment)
+    	$requete = "SELECT * FROM utilisateur WHERE (pseudo=? OR email=?) AND password=?";
+    	$stmt = $db->prepare($requete);
+    	$stmt->bindParam(1, $pseudo);
+      $stmt->bindParam(2, $email);
+    	$stmt->bindParam(3, $encryptedpassword);   // ATTENTION on bind en convertissant en MD5 ce qui est reçu
+
+    	$stmt->execute();
+
+    	if ($stmt->rowCount() > 0) {
+    		// login effectué avec succès ! on a trouvé un utilisateur correspondant
+    		// mise en session
+    		$curUsr = $stmt->fetch(PDO::FETCH_OBJ);
+    		$_SESSION['id_compte'] = $curUsr->id_compte;
+    		$_SESSION['email'] = $curUsr->email;
+    		$_SESSION['pseudo'] = $curUsr->pseudo;
+    		$_SESSION['password'] = $curUsr->password;
+
+        header('location:session.php');
+    	}
+    	else
+    	{
+    		// erreur de login, pas trouvé d'utilisateur...on repart sur le login...
+        echo "queue";
+    	}
+    }
+    catch(PDOException $e)
+    {
+      echo "stringficelle";
+    	die('Une erreur est survenue ! ' . $e->getMessage());
+    }
+  }
 ?>
