@@ -114,9 +114,8 @@
           <!--alert-->
           <div class="alert">
               <?php
-              $error = isset($_GET['error'])?$_GET['error']:'';
-              if(!empty($error)){
-                if($error = "emailtaken"){
+              if(!empty(isset($_GET['error']))){
+                if(isset($_GET['error']) == "emailtaken"){
                   echo '<div class="container" id=emailalert>
                           <div class="row">
                             <div class="alert alert-danger" role="alert">
@@ -127,6 +126,22 @@
                               </div>
                               <div class="col-md-2">
                                 <button type="button" id="emailalert" onclick="hideEmailAlert()">x</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>';
+                }
+                elseif (isset($_GET['error']) == "pseudotaken"){
+                  echo '<div class="container" id=pseudoalert>
+                          <div class="row">
+                            <div class="alert alert-danger" role="alert">
+                              <div class="col-md-2">
+                              </div>
+                              <div class="col-md-8">
+                                  This pseudo is already taken ! Please chose another one !
+                              </div>
+                              <div class="col-md-2">
+                                <button type="button" id="pseudoalert" onclick="hidePseudoAlert()">x</button>
                               </div>
                             </div>
                           </div>
@@ -246,6 +261,10 @@
 
         function hideEmailAlert(){
           document.getElementById('emailalert').style.display ="none";
+        }
+
+        function hidePseudoAlert(){
+          document.getElementById('pseudoalert').style.display ="none";
         }
 
         function openTab(evt, onglet) {

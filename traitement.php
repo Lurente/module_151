@@ -18,10 +18,14 @@
       echo "signIn";
       // préparation de la requete préparée (Prepared Statment)
       $stmt = $db->query("SELECT email FROM compte WHERE email = '$email'");
+      $stmt2 = $db->query("SELECT pseudo FROM compte WHERE pseudo = '$pseudo'");
+      //$stmt = $db->query("SELECT password FROM compte WHERE password = '$encryptedpassword'");
 
       $result = $stmt->fetch(PDO::FETCH_OBJ);
+      $result2 = $stmt2->fetch(PDO::FETCH_OBJ);
 
-      if ($result->email != $email) {
+      if ($result->email != $email AND $result2->pseudo != $pseudo)
+      {
         $requete = $db->prepare("INSERT INTO compte (email, pseudo, password) VALUES (:email, :pseudo, :password)" );
 
           $requete->bindParam(":email", $email);
@@ -32,11 +36,16 @@
 
           header('location:index.php');
       }
-      else
+      elseif ($result->email = $email)
       {
-        header('location:index.php?error="emailtaken"');
+        echo "email taken";
+        //header('location:index.php?error="emailtaken"');
       }
-
+      elseif ($result2->pseudo = $pseudo)
+      {
+        //header('location:index.php?error="pseudotaken"');
+        echo "pseudo taken";
+      }
     }
     catch(PDOException $e){
       die('Une erreur est survenue ! ' . $e->getMessage());
