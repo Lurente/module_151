@@ -86,7 +86,7 @@
                                     <label for="password">Mot de passe :</label><br>
                                     <input type="password" id="passwordSignin" name="password" value=""><br>
                                     <label for="confirm-password">Confirmez mot de passe :</label><br>
-                                    <input type="password" id="confirm-passwordSignin" name="confirm-password" >
+                                    <input type="password" id="confirm-passwordSignin" name="confirm-password"><br><br>
                                     <input type="button" onclick="checkFieldsSingin()" value="Sign-in">
                                   </form>
                             </div>
@@ -114,8 +114,10 @@
           <!--alert-->
           <div class="alert">
               <?php
-              if(!empty(isset($_GET['error']))){
-                if(isset($_GET['error']) == "emailtaken"){
+              $error = isset($_GET['error'])?$_GET['error']:'';
+
+              if($error != ''){
+                if($error == "emailtaken"){
                   echo '<div class="container" id=emailalert>
                           <div class="row">
                             <div class="alert alert-danger" role="alert">
@@ -131,7 +133,7 @@
                           </div>
                         </div>';
                 }
-                elseif (isset($_GET['error']) == "pseudotaken"){
+                elseif ($error == "pseudotaken"){
                   echo '<div class="container" id=pseudoalert>
                           <div class="row">
                             <div class="alert alert-danger" role="alert">

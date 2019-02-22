@@ -8,6 +8,7 @@
   $password = isset($_POST['password'])?$_POST['password']:'';
   $encryptedpassword = md5($password);
 
+
   echo "<pre>";
   print_r($_POST);
   echo "</pre>";
@@ -15,37 +16,39 @@
   if(isset($_POST['signIn'])){
     try
     {
-      echo "signIn";
+      echo $pseudo;
+
       // préparation de la requete préparée (Prepared Statment)
-      $stmt = $db->query("SELECT email FROM compte WHERE email = '$email'");
-      $stmt2 = $db->query("SELECT pseudo FROM compte WHERE pseudo = '$pseudo'");
+
+      $emailcheck = $db->prepare("SELECT *  FROM compte WHERE email=:email");
+      $emailcheck->bindParam(":email", $email);
+      $emailcheck->execute();
+
+      $usernamecheck = $db->prepare("SELECT * FROM compte WHERE pseudo=:pseudo");
+      $usernamecheck->bindParam(":pseudo", $pseudo);
+      $usernamecheck->execute();
       //$stmt = $db->query("SELECT password FROM compte WHERE password = '$encryptedpassword'");
 
-      $result = $stmt->fetch(PDO::FETCH_OBJ);
-      $result2 = $stmt2->fetch(PDO::FETCH_OBJ);
+      if ($emailcheck->rowCount() > 0)
+        header('location:index.php?error=emailtaken');
 
-      if ($result->email != $email AND $result2->pseudo != $pseudo)
-      {
-        $requete = $db->prepare("INSERT INTO compte (email, pseudo, password) VALUES (:email, :pseudo, :password)" );
+      if ($usernamecheck->rowCount() > 0)
+        header('location:index.php?error=pseudotaken');
 
-          $requete->bindParam(":email", $email);
-          $requete->bindParam(":pseudo", $pseudo);
-          $requete->bindParam(":password", $encryptedpassword);
 
-          $requete->execute();
 
-          header('location:index.php');
-      }
-      elseif ($result->email = $email)
-      {
-        echo "email taken";
-        //header('location:index.php?error="emailtaken"');
-      }
-      elseif ($result2->pseudo = $pseudo)
-      {
-        //header('location:index.php?error="pseudotaken"');
-        echo "pseudo taken";
-      }
+
+      $requete = $db->prepare("INSERT INTO compte (email, pseudo, password) VALUES (:email, :pseudo, :password)" );
+
+      $requete->bindParam(":email", $email);
+      $requete->bindParam(":pseudo", $pseudo);
+      $requete->bindParam(":password", $encryptedpassword);
+
+      $requete->execute();
+
+          //header('location:index.php');
+
+
     }
     catch(PDOException $e){
       die('Une erreur est survenue ! ' . $e->getMessage());
