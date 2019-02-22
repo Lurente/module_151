@@ -29,25 +29,24 @@
       $usernamecheck->execute();
       //$stmt = $db->query("SELECT password FROM compte WHERE password = '$encryptedpassword'");
 
-      if ($emailcheck->rowCount() > 0)
+      if ($emailcheck->rowCount() > 0){
         header('location:index.php?error=emailtaken');
-
-      if ($usernamecheck->rowCount() > 0)
+      }
+      elseif ($usernamecheck->rowCount() > 0){
         header('location:index.php?error=pseudotaken');
+      }elseif ($password != $encryptedpassword){
+        header('location:index.php?error=passwordNonSimilaire');
+      }else{
+        $requete = $db->prepare("INSERT INTO compte (email, pseudo, password) VALUES (:email, :pseudo, :password)" );
 
+        $requete->bindParam(":email", $email);
+        $requete->bindParam(":pseudo", $pseudo);
+        $requete->bindParam(":password", $encryptedpassword);
 
+        $requete->execute();
 
-
-      $requete = $db->prepare("INSERT INTO compte (email, pseudo, password) VALUES (:email, :pseudo, :password)" );
-
-      $requete->bindParam(":email", $email);
-      $requete->bindParam(":pseudo", $pseudo);
-      $requete->bindParam(":password", $encryptedpassword);
-
-      $requete->execute();
-
-          //header('location:index.php');
-
+        header('location:index.php');
+      }
 
     }
     catch(PDOException $e){
@@ -82,12 +81,10 @@
     	else
     	{
     		// erreur de login, pas trouvé d'utilisateur...on repart sur le login...
-        echo "queue";
     	}
     }
     catch(PDOException $e)
     {
-      echo "stringficelle";
     	die('Une erreur est survenue ! ' . $e->getMessage());
     }
   }

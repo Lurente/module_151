@@ -70,41 +70,49 @@
                         <p>Welcome to <a href="#">DOODLE WAR </a>!</p> <br>
                         <p>Please Login or Sign-in</p>
                         <div class="connexion">
-                          <div class="tab" >
+                          <div class="tab">
                             <button class="onglet" onclick="openTab(event, 'onglet1')" id="default">sign-in</button>
                             <button class="onglet" onclick="openTab(event, 'onglet2')">login</button>
                           </div>
                           <!-- #collumn -->
-                            <div id="onglet1" class="content">
-                                  <h2>Sign-in</h2>
-                                  <form id="Sign-inForm" action="traitement.php" method="post">
-                                    <input type="text" name="signIn" value="1" hidden >
-                                    <label for="email">Adresse mail:</label><br>
-                                    <input type="email" id="emailSignin" name="email" value=""><br>
-                                    <label for="pseudo">Pseudo:</label><br>
-                                    <input type="text" id="pseudoSignin" name="pseudo" value=""><br>
-                                    <label for="password">Mot de passe :</label><br>
-                                    <input type="password" id="passwordSignin" name="password" value=""><br>
-                                    <label for="confirm-password">Confirmez mot de passe :</label><br>
-                                    <input type="password" id="confirm-passwordSignin" name="confirm-password"><br><br>
-                                    <input type="button" onclick="checkFieldsSingin()" value="Sign-in">
-                                  </form>
+                          <div class="col-md-4">
+                          </div>
+                          <div class="col-md-4">
+                            <div class="onglet">
+                              <!-- #collumn -->
+                              <div id="onglet1" class="content">
+                                    <h2>Sign-in</h2><br>
+                                    <form id="Sign-inForm" action="traitement.php" method="post">
+                                      <input type="text" name="signIn" value="1" hidden >
+                                      <label for="email">Adresse mail:</label><br>
+                                      <input type="email" id="emailSignin" name="email" value=""><br><br>
+                                      <label for="pseudo">Pseudo:</label><br>
+                                      <input type="text" id="pseudoSignin" name="pseudo" value=""><br><br>
+                                      <label for="password">Mot de passe :</label><br>
+                                      <input type="password" id="passwordSignin" name="password" value=""><br><br>
+                                      <label for="confirm-password">Confirmez mot de passe :</label><br>
+                                      <input type="password" id="confirm-passwordSignin" name="confirm-password"><br><br>
+                                      <input type="button" onclick="checkFieldsSingin()" value="Sign-in">
+                                    </form>
+                              </div>
+                            <!-- /collumn -->
+                            <!-- #collumn -->
+                              <div id="onglet2" class="content">
+                                    <h2>login</h2><br>
+                                    <form id="LoginForm" action="traitement.php" method="post">
+                                      <label for="email">Adresse mail ou pseudo :</label><br>
+                                      <input type="email" id="email" name="email" value=""><br><br>
+                                      <label for="password">Mot de passe :</label><br>
+                                      <input type="password" id="password" name="password" value=""><br><br>
+                                      <input type="button" onclick="checkFieldsLogin()" value="Login">
+                                      <input type="number" name="login" value="1" hidden>
+                                    </form>
+                              </div>
+                            <!-- /collumn -->
                             </div>
-                          <!-- /collumn -->
-
-                          <!-- #collumn -->
-                            <div id="onglet2" class="content">
-                                  <h2>login</h2>
-                                  <form id="LoginForm" action="traitement.php" method="post">
-                                    <label for="email">Adresse mail ou pseudo :</label><br>
-                                    <input type="email" id="email" name="email" value=""><br>
-                                    <label for="password">Mot de passe :</label><br>
-                                    <input type="password" id="password" name="password" value=""><br><br>
-                                    <input type="button" onclick="checkFieldsLogin()" value="Login">
-                                    <input type="number" name="login" value="1" hidden>
-                                  </form>
-                            </div>
-                          <!-- /collumn -->
+                          </div>
+                          <div class="col-md-4">
+                          </div>
                         </div>
                     </div>
                 </div>
@@ -118,13 +126,13 @@
 
               if($error != ''){
                 if($error == "emailtaken"){
-                  echo '<div class="container" id=emailalert>
+                  echo '<div class="container" id="emailalert">
                           <div class="row">
-                            <div class="alert alert-danger" role="alert">
+                            <div class="alert alert-danger" class"alignMiddle" role="alert">
                               <div class="col-md-2">
                               </div>
                               <div class="col-md-8">
-                                  This email is already taken ! Please chose another one or try to login with it !
+                                  <p>This email is already taken ! Please chose another one or try to login with it !</p>
                               </div>
                               <div class="col-md-2">
                                 <button type="button" id="emailalert" onclick="hideEmailAlert()">x</button>
@@ -134,13 +142,13 @@
                         </div>';
                 }
                 elseif ($error == "pseudotaken"){
-                  echo '<div class="container" id=pseudoalert>
+                  echo '<div class="container" id="pseudoalert">
                           <div class="row">
-                            <div class="alert alert-danger" role="alert">
+                            <div class="alert alert-danger" class"alignMiddle" role="alert">
                               <div class="col-md-2">
                               </div>
                               <div class="col-md-8">
-                                  This pseudo is already taken ! Please chose another one !
+                                  <p>This pseudo is already taken ! Please chose another one !</p>
                               </div>
                               <div class="col-md-2">
                                 <button type="button" id="pseudoalert" onclick="hidePseudoAlert()">x</button>
@@ -148,6 +156,22 @@
                             </div>
                           </div>
                         </div>';
+                }
+                elseif ($error == 'passwordNonSimilaire'){
+                  echo "<div class='container' id='passwordalert'>
+                          <div class='row'>
+                            <div class='alert alert-danger' class'alignMiddle' role='alert'>
+                              <div class='col-md-2'>
+                              </div>
+                              <div class='col-md-8'>
+                                  <p>The given passwords don't match! Please make sure they do!</p>
+                              </div>
+                              <div class='col-md-2'>
+                                <button type='button' id='passwordalert' onclick='hidePasswordAlert()'>x</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>";
                 }
               }
               ?>
@@ -250,7 +274,6 @@
     				formCheck = false;
     			}
 
-
     			if (document.getElementById('confirm-passwordSignin').value == '') {
     				document.getElementById('confirm-passwordSignin').style.backgroundColor = 'red';
     				formCheck = false;
@@ -269,6 +292,10 @@
           document.getElementById('pseudoalert').style.display ="none";
         }
 
+        function hidePasswordAlert(){
+          document.getElementById('passwordalert').style.display ="none";
+        }
+
         function openTab(evt, onglet) {
           var i, content, tab;
           content = document.getElementsByClassName("content");
@@ -282,7 +309,9 @@
           document.getElementById(onglet).style.display = "block";
           evt.currentTarget.className += " active";
         }
+
           document.getElementById("default").click();
+
       </script>
 
     </body>

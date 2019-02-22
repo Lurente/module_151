@@ -8,20 +8,25 @@ body{
 
 
 }
+
 .nav{
    z-index: 999;
+
    nav {
    	line-height: 15vh;
    	background-color: transparent;
    	width: 100%;
+
       ul {
       	list-style: none;
        	text-align: center;
       	margin: 0;
       	padding: 0;
       	height: 15vh;
+
           li {
           	display: inline-block;
+
               a {
                 text-decoration: none;
                 margin: 0 5vh;
@@ -29,16 +34,20 @@ body{
                 font-weight: lighter;
                 text-align: center;
               }
+
               a:link, a:visited, a:active {
                 color: #000;
               }
+
               a:hover, a:focus {
               border-bottom: 0.3vh #525252 solid;
               }
+
               a#current{
                 color: #525252;
                 border-bottom: 0.3vh #525252 solid;
               }
+
               a#current:hover{
                 color: #525252;
               }
@@ -52,35 +61,44 @@ body{
     padding-bottom: 30px;
     width: 100%;
     border-top: 1px solid #ababab;
+
     .col-md-2{
      line-height: 15vh;
+
       .logo_footer{
         width: 10vh ;
         height: 10vh ;
       }
     }
+
     #right_logo_footer{
       text-align: right;
        line-height: 15vh;
+
        .logo_footer{
          width: 10vh ;
          height: 10vh ;
        }
     }
+
     .col-md-8{
         text-align: center;
         margin: auto;
+
         .foot_nav{
          line-height: 15vh;
          background-color: transparent;
          text-align: left;
+
            ul {
              list-style: none;
              margin: 0;
              padding: 0;
              text-align: center;
+
                li {
                  display: inline-block;
+
                    a {
                      font-size: 24px;
                      margin-top: 9px;
@@ -98,17 +116,22 @@ body{
 }
 
 .page-homepage{
+
     .header{
+
         .col-md-12{
           text-align: center;
+
             #logo{
                 margin-bottom: 4vh;
                 width: 75vh;
                 height: 75vh ;
             }
         }
+
         .pageTitle{
             text-align: center;
+
             h1{
                 color: #000;
                 font-family: 'Cabin Sketch', cursive;
@@ -116,9 +139,12 @@ body{
             }
         }
     }
+
     .introduction{
+
             p{
                 font-size: 26px;
+
                 a{
                     color: #000;
                 }
@@ -126,19 +152,63 @@ body{
 
             .connexion{
               text-align: center;
-              .onglet{
+
+
+              .tab {
+                  overflow: hidden;
+                  color: #000;
+                  button {
+                      background-color: rgb(78, 78, 78);
+                      border: 1px solid #000;
+                      border-radius: 16px 0 0 0;
+                      cursor: pointer;
+                      width: 12vh ;
+                      height: 6vh;
+                      transition: 0.3s;
+                      font-size: 17px;
+                      margin: 0 8px 0 8px
+                  }
+                  button:hover {
+                      background-color:rgb(106, 106, 106);
+                  }
+                  button.active {
+                      background-color: rgb(135, 133, 133);
+                  }
+              }
+
+              .col-md-4{
+                text-align: center;
+                padding: 0 5em;
+
+                form{
+                  border: 1px solid #000;
+                  border-radius: 32px;
+                  width: 100%;
+                  padding: 2em 0;
+                }
               }
             }
     }
+
     .alert{
       width: 100%;
       display: inline-block;
+      text-align: center;
+
       .col-md-8 {
         text-align: center;
+
+        p{
+          text-align: center;
+          margin: 0.3vh 0 0 0;
+          color: #000;
+          }
       }
+
       .col-md-2{
         color: #000;
         text-align: right;
       }
+
     }
 }

@@ -95,11 +95,41 @@ body {
     color: #000; }
 .page-homepage .introduction .connexion {
   text-align: center; }
+  .page-homepage .introduction .connexion .tab {
+    overflow: hidden;
+    color: #000; }
+    .page-homepage .introduction .connexion .tab button {
+      background-color: #4e4e4e;
+      border: 1px solid #000;
+      border-radius: 16px 0 0 0;
+      cursor: pointer;
+      width: 12vh;
+      height: 6vh;
+      transition: 0.3s;
+      font-size: 17px;
+      margin: 0 8px 0 8px; }
+    .page-homepage .introduction .connexion .tab button:hover {
+      background-color: #6a6a6a; }
+    .page-homepage .introduction .connexion .tab button.active {
+      background-color: #878585; }
+  .page-homepage .introduction .connexion .col-md-4 {
+    text-align: center;
+    padding: 0 5em; }
+    .page-homepage .introduction .connexion .col-md-4 form {
+      border: 1px solid #000;
+      border-radius: 32px;
+      width: 100%;
+      padding: 2em 0; }
 .page-homepage .alert {
   width: 100%;
-  display: inline-block; }
+  display: inline-block;
+  text-align: center; }
   .page-homepage .alert .col-md-8 {
     text-align: center; }
+    .page-homepage .alert .col-md-8 p {
+      text-align: center;
+      margin: 0.3vh 0 0 0;
+      color: #000; }
   .page-homepage .alert .col-md-2 {
     color: #000;
     text-align: right; }
