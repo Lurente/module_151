@@ -60,7 +60,7 @@ body{
     padding-top: 30px;
     padding-bottom: 30px;
     width: 100%;
-    border-top: 1px solid #ababab;
+    border-top: 0.2vh solid #ababab;
 
     .col-md-2{
      line-height: 15vh;
@@ -158,9 +158,9 @@ body{
                   overflow: hidden;
                   color: #000;
                   button {
-                      background-color: rgb(78, 78, 78);
-                      border: 1px solid #000;
-                      border-radius: 16px 0 0 0;
+                      background-color: rgb(194, 208, 255);
+                      border: 0.1vh solid #000;
+                      border-radius: 2vh 0 2vh 0;
                       cursor: pointer;
                       width: 12vh ;
                       height: 6vh;
@@ -169,10 +169,12 @@ body{
                       margin: 0 8px 0 8px
                   }
                   button:hover {
-                      background-color:rgb(106, 106, 106);
+                      background-color: rgb(156, 178, 255);
+                      border-radius: 0 3vh 0 3vh;
                   }
                   button.active {
-                      background-color: rgb(135, 133, 133);
+                      background-color: rgb(226, 232, 255);
+                      border-radius: 0 2vh 0 2vh;
                   }
               }
 
@@ -181,7 +183,7 @@ body{
                 padding: 0 5em;
 
                 form{
-                  border: 1px solid #000;
+                  border: 0.1vh solid #000;
                   border-radius: 32px;
                   width: 100%;
                   padding: 2em 0;

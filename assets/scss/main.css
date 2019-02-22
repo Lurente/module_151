@@ -41,7 +41,7 @@ body {
   padding-top: 30px;
   padding-bottom: 30px;
   width: 100%;
-  border-top: 1px solid #ababab; }
+  border-top: 0.2vh solid #ababab; }
   .footer .col-md-2 {
     line-height: 15vh; }
     .footer .col-md-2 .logo_footer {
@@ -99,9 +99,9 @@ body {
     overflow: hidden;
     color: #000; }
     .page-homepage .introduction .connexion .tab button {
-      background-color: #4e4e4e;
-      border: 1px solid #000;
-      border-radius: 16px 0 0 0;
+      background-color: #c2d0ff;
+      border: 0.1vh solid #000;
+      border-radius: 2vh 0 2vh 0;
       cursor: pointer;
       width: 12vh;
       height: 6vh;
@@ -109,14 +109,16 @@ body {
       font-size: 17px;
       margin: 0 8px 0 8px; }
     .page-homepage .introduction .connexion .tab button:hover {
-      background-color: #6a6a6a; }
+      background-color: #9cb2ff;
+      border-radius: 0 3vh 0 3vh; }
     .page-homepage .introduction .connexion .tab button.active {
-      background-color: #878585; }
+      background-color: #e2e8ff;
+      border-radius: 0 2vh 0 2vh; }
   .page-homepage .introduction .connexion .col-md-4 {
     text-align: center;
     padding: 0 5em; }
     .page-homepage .introduction .connexion .col-md-4 form {
-      border: 1px solid #000;
+      border: 0.1vh solid #000;
       border-radius: 32px;
       width: 100%;
       padding: 2em 0; }

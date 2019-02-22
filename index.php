@@ -94,6 +94,7 @@
                                       <input type="password" id="confirm-passwordSignin" name="confirm-password"><br><br>
                                       <input type="button" onclick="checkFieldsSingin()" value="Sign-in">
                                     </form>
+                                    <p id="signinFormFalse" style="display:none; color:red;">Please fill all the fields !</p>
                               </div>
                             <!-- /collumn -->
                             <!-- #collumn -->
@@ -107,6 +108,7 @@
                                       <input type="button" onclick="checkFieldsLogin()" value="Login">
                                       <input type="number" name="login" value="1" hidden>
                                     </form>
+                                    <p id="loginFormFalse" style="display:none; color:red;">Please fill all the fields !</p>
                               </div>
                             <!-- /collumn -->
                             </div>
@@ -239,49 +241,57 @@
     		function checkFieldsLogin()
     		{
     			var formCheck = true;
-
+          var colorFalse = '#f2dede'
     			if (document.getElementById('email').value == '') {
-    				document.getElementById('email').style.backgroundColor = 'red';
+    				document.getElementById('email').style.backgroundColor = colorFalse;
     				formCheck = false;
     			}
 
     			if (document.getElementById('password').value == '') {
-    				document.getElementById('password').style.backgroundColor = 'red';
+    				document.getElementById('password').style.backgroundColor = colorFalse;
     				formCheck = false;
     			}
 
     			if (formCheck) {
     				document.getElementById('LoginForm').submit();
-    			}
+    			}else
+          {
+            document.getElementById('loginFormFalse').style.display = "block";
+          }
     		}
 
         function checkFieldsSingin()
     		{
     			var formCheck = true;
+          var colorFalse = '#f2dede'
 
     			if (document.getElementById('emailSignin').value == '') {
-    				document.getElementById('emailSignin').style.backgroundColor = 'red';
+    				document.getElementById('emailSignin').style.backgroundColor = colorFalse;
     				formCheck = false;
     			}
 
           if (document.getElementById('pseudoSignin').value == '') {
-    				document.getElementById('pseudoSignin').style.backgroundColor = 'red';
+    				document.getElementById('pseudoSignin').style.backgroundColor = colorFalse;
     				formCheck = false;
     			}
 
     			if (document.getElementById('passwordSignin').value == '') {
-    				document.getElementById('passwordSignin').style.backgroundColor = 'red';
+    				document.getElementById('passwordSignin').style.backgroundColor = colorFalse;
     				formCheck = false;
     			}
 
     			if (document.getElementById('confirm-passwordSignin').value == '') {
-    				document.getElementById('confirm-passwordSignin').style.backgroundColor = 'red';
+    				document.getElementById('confirm-passwordSignin').style.backgroundColor = colorFalse;
     				formCheck = false;
     			}
 
     			if (formCheck) {
     				document.getElementById('Sign-inForm').submit();
     			}
+          else
+          {
+            document.getElementById('signinFormFalse').style.display = "block";
+          }
     		}
 
         function hideEmailAlert(){
