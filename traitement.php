@@ -7,6 +7,7 @@
   $pseudo = isset($_POST['pseudo'])?$_POST['pseudo']:'';
   $password = isset($_POST['password'])?$_POST['password']:'';
   $encryptedpassword = md5($password);
+  $level = 'stdrUsr';
 
 
   echo "<pre>";
@@ -37,11 +38,12 @@
       }elseif ($password != $encryptedpassword){
         header('location:index.php?error=passwordNonSimilaire');
       }else{
-        $requete = $db->prepare("INSERT INTO compte (email, pseudo, password) VALUES (:email, :pseudo, :password)" );
+        $requete = $db->prepare("INSERT INTO compte (email, pseudo, password) VALUES (:email, :pseudo, :password, :level)" );
 
         $requete->bindParam(":email", $email);
         $requete->bindParam(":pseudo", $pseudo);
         $requete->bindParam(":password", $encryptedpassword);
+        $requete->bindParam(":level", $level);
 
         $requete->execute();
 
@@ -59,7 +61,7 @@
     try
     {
     	// préparation de la requete préparée (Prepared Statment)
-    	$requete = "SELECT * FROM utilisateur WHERE (pseudo=? OR email=?) AND password=?";
+    	$requete = "SELECT * FROM compte WHERE (pseudo=? OR email=?) AND password=?";
     	$stmt = $db->prepare($requete);
     	$stmt->bindParam(1, $pseudo);
       $stmt->bindParam(2, $email);
@@ -71,6 +73,7 @@
     		// login effectué avec succès ! on a trouvé un utilisateur correspondant
     		// mise en session
     		$curUsr = $stmt->fetch(PDO::FETCH_OBJ);
+        $_SESSION['level'] = $curUsr->level;
     		$_SESSION['id_compte'] = $curUsr->id_compte;
     		$_SESSION['email'] = $curUsr->email;
     		$_SESSION['pseudo'] = $curUsr->pseudo;
@@ -80,7 +83,7 @@
     	}
     	else
     	{
-    		// erreur de login, pas trouvé d'utilisateur...on repart sur le login...
+    		header('location:index.php?error=badPassword');
     	}
     }
     catch(PDOException $e)

@@ -175,6 +175,22 @@
                           </div>
                         </div>";
                 }
+                elseif ($error == 'badPassword'){
+                  echo "<div class='container' id='badPasswordalert'>
+                          <div class='row'>
+                            <div class='alert alert-danger' class'alignMiddle' role='alert'>
+                              <div class='col-md-2'>
+                              </div>
+                              <div class='col-md-8'>
+                                  <p>The given passwords is wrong! Please try again!</p>
+                              </div>
+                              <div class='col-md-2'>
+                                <button type='button' id='badPasswordalert' onclick='hideBadPasswordAlert()'>x</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>";
+                }
               }
               ?>
           </div>
