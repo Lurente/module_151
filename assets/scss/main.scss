@@ -218,4 +218,15 @@ body{
   body{
     background-image: url(/images/town_map_default.png);
   }
+  .chat{
+    .col-md-4{
+      display: inline-block;
+      .col-md-2{
+        background-color: rgb(232, 122, 51);
+      }
+      .col-md-8{
+        background-color: red;
+      }
+    }
+  }
 }

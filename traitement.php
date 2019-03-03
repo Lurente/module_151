@@ -8,7 +8,9 @@
   $password = isset($_POST['password'])?$_POST['password']:'';
   $encryptedpassword = md5($password);
   $level = 'stdrUsr';
-
+  $id_envoyeur = $_SESSION['id_compte'];
+  $message = $_POST['chat'];
+  $id_destinataire = 3;
 
   echo "<pre>";
   print_r($_POST);
@@ -91,4 +93,23 @@
     	die('Une erreur est survenue ! ' . $e->getMessage());
     }
   }
+
+  if(isset($_POST['sendChat'])){
+    try
+    {
+
+      $sendChat = $db->prepare("INSERT INTO chat (id_envoyeur, message, id_destinataire) VALUES (:id_envoyeur, :message, :id_destinataire)");
+      $sendChat->bindParam(":id_envoyeur", $id_envoyeur);
+      $sendChat->bindParam(":message", $message);
+      $sendChat->bindParam(":id_destinataire", $id_destinataire);
+      $sendChat->execute();
+      
+      header('location:session.php');
+
+    }
+    catch(PDOException $e){
+      die('Une erreur est survenue ! ' . $e->getMessage());
+    }
+  }
+
 ?>

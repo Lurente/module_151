@@ -138,5 +138,11 @@ body {
 
 .page-session body {
   background-image: url(/images/town_map_default.png); }
+.page-session .chat .col-md-4 {
+  display: inline-block; }
+  .page-session .chat .col-md-4 .col-md-2 {
+    background-color: #e87a33; }
+  .page-session .chat .col-md-4 .col-md-8 {
+    background-color: red; }
 
 /*# sourceMappingURL=main.css.map */
