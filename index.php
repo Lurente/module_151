@@ -90,8 +90,8 @@
                                       <input type="text" id="pseudoSignin" name="pseudo" value=""><br><br>
                                       <label for="password">Mot de passe :</label><br>
                                       <input type="password" id="passwordSignin" name="password" value=""><br><br>
-                                      <label for="confirm-password">Confirmez mot de passe :</label><br>
-                                      <input type="password" id="confirm-passwordSignin" name="confirm-password"><br><br>
+                                      <label for="confirmPassword">Confirmez mot de passe :</label><br>
+                                      <input type="password" id="confirmPasswordSignin" name="confirmPassword"><br><br>
                                       <input type="button" onclick="checkFieldsSingin()" value="Sign-in">
                                     </form>
                                     <p id="signinFormFalse" style="display:none; color:red;">Please fill all the fields !</p>
@@ -101,8 +101,8 @@
                               <div id="onglet2" class="content">
                                     <h2>login</h2><br>
                                     <form id="LoginForm" action="traitement.php" method="post">
-                                      <label for="email">Adresse mail ou pseudo :</label><br>
-                                      <input type="email" id="email" name="email" value=""><br><br>
+                                      <label for="emailPseudo">Adresse mail ou pseudo :</label><br>
+                                      <input type="text" id="emailPseudo" name="emailPseudo" value=""><br><br>
                                       <label for="password">Mot de passe :</label><br>
                                       <input type="password" id="password" name="password" value=""><br><br>
                                       <input type="button" onclick="checkFieldsLogin()" value="Login">
@@ -258,8 +258,8 @@
     		{
     			var formCheck = true;
           var colorFalse = '#f2dede'
-    			if (document.getElementById('email').value == '') {
-    				document.getElementById('email').style.backgroundColor = colorFalse;
+    			if (document.getElementById('emailPseudo').value == '') {
+    				document.getElementById('emailPseudo').style.backgroundColor = colorFalse;
     				formCheck = false;
     			}
 
@@ -296,8 +296,8 @@
     				formCheck = false;
     			}
 
-    			if (document.getElementById('confirm-passwordSignin').value == '') {
-    				document.getElementById('confirm-passwordSignin').style.backgroundColor = colorFalse;
+    			if (document.getElementById('confirmPasswordSignin').value == '') {
+    				document.getElementById('confirmPasswordSignin').style.backgroundColor = colorFalse;
     				formCheck = false;
     			}
 
@@ -320,6 +320,10 @@
 
         function hidePasswordAlert(){
           document.getElementById('passwordalert').style.display ="none";
+        }
+
+        function hideBadPasswordAlert(){
+          document.getElementById('badPasswordalert').style.display ="none";
         }
 
         function openTab(evt, onglet) {

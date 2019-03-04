@@ -4,12 +4,14 @@
   require_once('includes/config.php');
 
   $email = isset($_POST['email'])?$_POST['email']:'';
+  $emailPseudo = isset($_POST['emailPseudo'])?$_POST['emailPseudo']:'';
   $pseudo = isset($_POST['pseudo'])?$_POST['pseudo']:'';
   $password = isset($_POST['password'])?$_POST['password']:'';
+  $confirmPassword = isset($_POST['confirmPassword'])?$_POST['confirmPassword']:'';
   $encryptedpassword = md5($password);
   $level = 'stdrUsr';
-  $id_envoyeur = $_SESSION['id_compte'];
-  $message = $_POST['chat'];
+  $id_envoyeur = isset($_SESSION['id_compte'])?$_SESSION['id_compte']:'';
+  $message = isset($_POST['chat'])?$_POST['chat']:'';
   $id_destinataire = 3;
 
   echo "<pre>";
@@ -19,7 +21,6 @@
   if(isset($_POST['signIn'])){
     try
     {
-      echo $pseudo;
 
       // préparation de la requete préparée (Prepared Statment)
 
@@ -37,10 +38,10 @@
       }
       elseif ($usernamecheck->rowCount() > 0){
         header('location:index.php?error=pseudotaken');
-      }elseif ($password != $encryptedpassword){
+      }elseif ($password != $confirmPassword){
         header('location:index.php?error=passwordNonSimilaire');
       }else{
-        $requete = $db->prepare("INSERT INTO compte (email, pseudo, password) VALUES (:email, :pseudo, :password, :level)" );
+        $requete = $db->prepare("INSERT INTO compte (email, pseudo, password, level) VALUES (:email, :pseudo, :password, :level)" );
 
         $requete->bindParam(":email", $email);
         $requete->bindParam(":pseudo", $pseudo);
@@ -48,6 +49,7 @@
         $requete->bindParam(":level", $level);
 
         $requete->execute();
+          echo $pseudo;
 
         header('location:index.php');
       }
@@ -65,8 +67,8 @@
     	// préparation de la requete préparée (Prepared Statment)
     	$requete = "SELECT * FROM compte WHERE (pseudo=? OR email=?) AND password=?";
     	$stmt = $db->prepare($requete);
-    	$stmt->bindParam(1, $pseudo);
-      $stmt->bindParam(2, $email);
+    	$stmt->bindParam(1, $emailPseudo);
+      $stmt->bindParam(2, $emailPseudo);
     	$stmt->bindParam(3, $encryptedpassword);   // ATTENTION on bind en convertissant en MD5 ce qui est reçu
 
     	$stmt->execute();
@@ -103,7 +105,7 @@
       $sendChat->bindParam(":message", $message);
       $sendChat->bindParam(":id_destinataire", $id_destinataire);
       $sendChat->execute();
-      
+
       header('location:session.php');
 
     }
