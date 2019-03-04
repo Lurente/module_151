@@ -22,34 +22,61 @@ session_start()
     </head>
     <body>
       <div class="page-session">
-        <?php
-        $usrname = isset($_SESSION['pseudo'])?$_SESSION['pseudo']:'';
-        echo "Bienvenue dans votre session $usrname";
-        ?>
-        <!--chat-->
-        <div class="chat">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-8">
+        <!--gameBackground-->
+          <div class="gameBackground">
+            <!--textAccueil-->
+              <div class="textAccueil">
+                  <?php
+                  $usrname = isset($_SESSION['pseudo'])?$_SESSION['pseudo']:'';
+                  echo "Bienvenue dans votre session $usrname";
+                  ?>
               </div>
-              <div class="col-md-4">
-                <div class="col-md-2">
-                  <p>chat</p>
-                </div>
-                <div class="col-md-8">
-                  <form id="sendChat" action="traitement.php" method="post">
-                    <input type="text" id="chat"name="chat" value="">
-                    <input type="name" name="sendChat" value="1" hidden>
-                  </form>
-                </div>
-                <div class="col-md-2">
-                  <input type="button" onclick="checkChatField()" value="chat">
+            <!--/textAccueil-->
+            <!--chat-->
+              <div class="chat">
+                <h1>Chat</h1>
+                <div class="container">
+                  <div class="chatOutput">
+                    <div class="row">
+                      <div class="col-md-4">
+                        </table>
+                        <?php
+                          echo "<table border='1'>
+                                  <tr>
+                                    <th>joueur</th>
+                                  </tr>";
+                                  foreach ($chatEntry as $key ) {
+                                    echo "<tr>
+                                            <td></td>
+                                          </tr>";
+                                  }
+                        ?>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="chatInput">
+                    <div class="row">
+                      <div class="col-md-4">
+                        <div class="col-md-2">
+                          <p>chat</p>
+                        </div>
+                        <div class="col-md-8">
+                          <form id="sendChat" action="traitement.php" method="post">
+                            <input type="text" id="chat"name="chat" value="">
+                            <input type="name" name="sendChat" value="1" hidden>
+                          </form>
+                        </div>
+                        <div class="col-md-2">
+                          <input type="button" onclick="checkChatField()" value="chat">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
+            <!--/chat-->
           </div>
-        </div>
-        <!--/chat-->
+        <!--/gameBackground-->
       </div>
       <script type="text/javascript">
         function checkChatField() {
@@ -58,7 +85,7 @@ session_start()
           if (document.getElementById('chat').value == '') {
     				formCheck = false;
     			}
-        
+
           if (formCheck) {
             document.getElementById('sendChat').submit();
           }

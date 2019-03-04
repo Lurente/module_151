@@ -136,13 +136,39 @@ body {
     color: #000;
     text-align: right; }
 
-.page-session body {
-  background-image: url(/images/town_map_default.png); }
-.page-session .chat .col-md-4 {
-  display: inline-block; }
-  .page-session .chat .col-md-4 .col-md-2 {
-    background-color: #e87a33; }
-  .page-session .chat .col-md-4 .col-md-8 {
-    background-color: red; }
+.page-session .gameBackground {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  background: url("../../images/town_map_default.png") no-repeat center; }
+.page-session .chat {
+  position: absolute;
+  bottom: 0;
+  left: 0; }
+  .page-session .chat h1 {
+    margin-left: 1vh; }
+  .page-session .chat .chatInput .col-md-4 {
+    background-color: #e87a33;
+    display: inline-block;
+    vertical-align: middle;
+    height: 40px;
+    border-radius: 0 0 1vh 0; }
+    .page-session .chat .chatInput .col-md-4 .col-md-2 {
+      margin-top: 10px; }
+      .page-session .chat .chatInput .col-md-4 .col-md-2 p {
+        margin: 0; }
+      .page-session .chat .chatInput .col-md-4 .col-md-2 input {
+        height: 25px; }
+    .page-session .chat .chatInput .col-md-4 .col-md-8 {
+      line-height: 30px; }
+      .page-session .chat .chatInput .col-md-4 .col-md-8 input {
+        margin-top: 2px;
+        width: 100%; }
+  .page-session .chat .chatOutput .col-md-4 {
+    background-color: #fbd7bf;
+    display: inline-block;
+    vertical-align: middle;
+    height: 80vh;
+    border-radius: 1vh 1vh 0 0; }
 
 /*# sourceMappingURL=main.css.map */

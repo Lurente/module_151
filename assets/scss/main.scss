@@ -215,17 +215,60 @@ body{
     }
 }
 .page-session{
-  body{
-    background-image: url(/images/town_map_default.png);
+
+  .gameBackground{
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background : url('../../images/town_map_default.png') no-repeat  center;
   }
+
   .chat{
-    .col-md-4{
-      display: inline-block;
-      .col-md-2{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    h1{
+      margin-left: 1vh
+    }
+    .chatInput{
+
+      .col-md-4{
         background-color: rgb(232, 122, 51);
+        display: inline-block;
+        vertical-align: middle;
+        height: 40px;
+        border-radius: 0 0 1vh 0 ;
+
+        .col-md-2{
+          margin-top: 10px;
+
+          p{
+            margin: 0;
+          }
+
+          input{
+            height:25px
+          }
+
+        }
+
+        .col-md-8{
+          line-height: 30px;
+
+          input{
+            margin-top: 2px;
+            width: 100%
+          }
+        }
       }
-      .col-md-8{
-        background-color: red;
+    }
+    .chatOutput{
+      .col-md-4{
+        background-color: rgb(251, 215, 191);
+        display: inline-block;
+        vertical-align: middle;
+        height: 80vh;
+        border-radius: 1vh 1vh 0 0  ;
       }
     }
   }
