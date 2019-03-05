@@ -1,10 +1,13 @@
 <?php
-session_start()
+session_start();
     /*
     Page name : index.php
     Description : main page of the website
     Author : Luca Prudente
     */
+
+      require_once('includes/config.php');
+
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -27,6 +30,7 @@ session_start()
             <!--textAccueil-->
               <div class="textAccueil">
                   <?php
+
                   $usrname = isset($_SESSION['pseudo'])?$_SESSION['pseudo']:'';
                   echo "Bienvenue dans votre session $usrname";
                   ?>
@@ -34,22 +38,21 @@ session_start()
             <!--/textAccueil-->
             <!--chat-->
               <div class="chat">
+                <form id="refreshChat" action="traitement.php" method="post" hidden>
+                  <input type="text" name="refreshChat" value="1">
+                </form>
                 <h1>Chat</h1>
                 <div class="container">
                   <div class="chatOutput">
                     <div class="row">
                       <div class="col-md-4">
-                        </table>
                         <?php
-                          echo "<table border='1'>
-                                  <tr>
-                                    <th>joueur</th>
-                                  </tr>";
-                                  foreach ($chatEntry as $key ) {
-                                    echo "<tr>
-                                            <td></td>
-                                          </tr>";
-                                  }
+                          $allMsg = $db->query("SELECT message, pseudo FROM chat INNER JOIN compte ON chat.id_compte = compte.id_compte ORDER BY id_chat ASC");
+                            while ($msg = $allMsg->fetch()) {
+                              echo "<b>".$msg['pseudo'] . " : </b>";
+                              echo $msg['message'];
+                              echo "<br><br>";
+                            }
                         ?>
                       </div>
                     </div>
@@ -78,6 +81,22 @@ session_start()
           </div>
         <!--/gameBackground-->
       </div>
+      <?php
+        if(isset($_POST['refreshChat'])){
+          try{
+            $requete = "SELECT * FROM chat ORDER BY id_chat ASC";
+            $refreshChat = $db->query($requete);
+
+            $_SESSION['allMsg'] = $refreshChat;
+            header('location:session.php');
+
+          }
+          catch(PDOException $e){
+            die('Une erreur est survenue ! ' . $e->getMessage());
+            echo "string";
+          }
+        }
+      ?>
       <script type="text/javascript">
         function checkChatField() {
           var formCheck = true;
@@ -90,6 +109,24 @@ session_start()
             document.getElementById('sendChat').submit();
           }
         }
+        chatRefresh(2000);
+        function chatRefresh(refreshTime) {
+          $.ajax({
+            url: 'session.php',
+            type: 'POST',
+            dataType: 'html'
+          })
+          .done(function( data ) {
+              $('#chat').html( data ); // data came back ok, so display it
+              })
+              .fail(function() {
+              $('#chat').prepend('Error retrieving new messages..');
+              });
+        }
+
+
+
+
       </script>
     </body>
 </html>

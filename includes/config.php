@@ -1,5 +1,5 @@
 <?php
-    define ('DSN', 'mysql:host=localhost;dbname=compte');
+    define ('DSN', 'mysql:host=localhost;dbname=Doodlewar');
     define ('USER', 'root');
     define ('PASS', '');
 

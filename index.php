@@ -1,4 +1,4 @@
-"<?php
+<?php
     /*
     Page name : index.php
       Description : main page of the website

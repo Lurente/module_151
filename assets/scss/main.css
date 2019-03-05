@@ -169,6 +169,7 @@ body {
     display: inline-block;
     vertical-align: middle;
     height: 80vh;
-    border-radius: 1vh 1vh 0 0; }
+    border-radius: 1vh 1vh 0 0;
+    overflow-y: scroll; }
 
 /*# sourceMappingURL=main.css.map */
