@@ -10,7 +10,7 @@
   $confirmPassword = isset($_POST['confirmPassword'])?$_POST['confirmPassword']:'';
   $encryptedpassword = md5($password);
   $level = 'stdrUsr';
-  $message = isset($_POST['chat'])?$_POST['chat']:'';
+  $message = isset($_POST['message'])?$_POST['message']:'';
 
   echo "<pre>";
   print_r($_POST);
@@ -102,10 +102,7 @@
       $sendChat = $db->prepare("INSERT INTO chat (message, id_compte) VALUES (:message, :id_compte)");
       $sendChat->bindParam(":message", $message);
       $sendChat->bindParam(":id_compte", $id_compte);
-
       $sendChat->execute();
-
-      header('location:session.php');
 
     }
     catch(PDOException $e){

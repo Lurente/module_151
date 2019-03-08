@@ -30,30 +30,43 @@ session_start();
             <!--textAccueil-->
               <div class="textAccueil">
                   <?php
-
                   $usrname = isset($_SESSION['pseudo'])?$_SESSION['pseudo']:'';
+                  echo "<parameter id='pseudo' value=" . $usrname .">";
                   echo "Bienvenue dans votre session $usrname";
                   ?>
               </div>
             <!--/textAccueil-->
             <!--chat-->
               <div class="chat">
-                <form id="refreshChat" action="traitement.php" method="post" hidden>
-                  <input type="text" name="refreshChat" value="1">
                 </form>
                 <h1>Chat</h1>
                 <div class="container">
-                  <div class="chatOutput">
+                  <div  class="chatOutput">
                     <div class="row">
                       <div class="col-md-4">
-                        <?php
-                          $allMsg = $db->query("SELECT message, pseudo FROM chat INNER JOIN compte ON chat.id_compte = compte.id_compte ORDER BY id_chat ASC");
-                            while ($msg = $allMsg->fetch()) {
-                              echo "<b>".$msg['pseudo'] . " : </b>";
-                              echo $msg['message'];
-                              echo "<br><br>";
-                            }
-                        ?>
+                        <div id="messages">
+                          <?php
+                            $allMsg = $db->query("SELECT message, pseudo FROM chat INNER JOIN compte ON chat.id_compte = compte.id_compte ORDER BY id_chat ASC");
+                              while ($msg = $allMsg->fetch()) {
+                                echo "<b>".$msg['pseudo'] . " : </b>";
+                                echo $msg['message'];
+                                echo "<br><br>";
+                              }
+                              if(isset($_POST['refreshChat'])){
+                                try{
+                                  $requete = "SELECT * FROM chat ORDER BY id_chat ASC";
+                                  $refreshChat = $db->query($requete);
+
+                                  $_SESSION['allMsg'] = $refreshChat;
+
+                                }
+                                catch(PDOException $e){
+                                  die('Une erreur est survenue ! ' . $e->getMessage());
+                                  echo "string";
+                                }
+                              }
+                          ?>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -65,12 +78,11 @@ session_start();
                         </div>
                         <div class="col-md-8">
                           <form id="sendChat" action="traitement.php" method="post">
-                            <input type="text" id="chat"name="chat" value="">
-                            <input type="name" name="sendChat" value="1" hidden>
+                            <input type="text" id="chat" name="chat" value="">
                           </form>
                         </div>
                         <div class="col-md-2">
-                          <input type="button" onclick="checkChatField()" value="chat">
+                          <input type="button" name="sendChat" id="envoi" value="chat">
                         </div>
                       </div>
                     </div>
@@ -81,51 +93,38 @@ session_start();
           </div>
         <!--/gameBackground-->
       </div>
-      <?php
-        if(isset($_POST['refreshChat'])){
-          try{
-            $requete = "SELECT * FROM chat ORDER BY id_chat ASC";
-            $refreshChat = $db->query($requete);
-
-            $_SESSION['allMsg'] = $refreshChat;
-            header('location:session.php');
-
-          }
-          catch(PDOException $e){
-            die('Une erreur est survenue ! ' . $e->getMessage());
-            echo "string";
-          }
-        }
-      ?>
       <script type="text/javascript">
-        function checkChatField() {
-          var formCheck = true;
 
-          if (document.getElementById('chat').value == '') {
-    				formCheck = false;
-    			}
+        $('#envoi').click(function(){
 
-          if (formCheck) {
-            document.getElementById('sendChat').submit();
-          }
-        }
-        chatRefresh(2000);
+            var formCheck = true;
+
+            var message = $('#chat').val();
+
+            if (document.getElementById('chat').value == '') {
+      				formCheck = false;
+      			}
+
+            if (formCheck) {
+              $.ajax({
+                  url : "traitement.php", // on donne l'URL du fichier de traitement
+                  type : "POST", // la requête est de type POST
+                  data : {message:message} // et on envoie nos données
+              });
+            }
+        });
+
+        chatRefresh(20000);
+
         function chatRefresh(refreshTime) {
           $.ajax({
             url: 'session.php',
             type: 'POST',
-            dataType: 'html'
-          })
-          .done(function( data ) {
-              $('#chat').html( data ); // data came back ok, so display it
-              })
-              .fail(function() {
-              $('#chat').prepend('Error retrieving new messages..');
-              });
+            success : function( html ) {
+              $('#messages').prepend( html ); // data came back ok, so display it
+              }
+          });
         }
-
-
-
 
       </script>
     </body>
