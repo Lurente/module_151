@@ -227,17 +227,36 @@ body{
     position: absolute;
     bottom: 0;
     left: 0;
-    h1{
-      margin-left: 1vh
+    .displayOrNotChat{
+      .row{
+        h1{
+          margin-left: 2vh;
+        }
+        .col-md-5{
+          border-radius: 1vh 1vh 0 0  ;
+          background-color: rgb(251, 215, 191);
+          width: 47.4vh;
+          border: 1px solid rgb(251, 215, 191);
+          margin-left: 1.4vh;
+          display: inline-block;
+          button{
+            background-color: white;
+            padding: 13px  13px 0 13px;
+            border-radius: 16px;
+            float: right;
+            margin-right: 1vh
+          }
+        }
+      }
     }
     .chatInput{
 
-      .col-md-4{
+      .col-md-5{
+        width: 47.3vh;
         background-color: rgb(232, 122, 51);
         display: inline-block;
         vertical-align: middle;
         height: 40px;
-        border-radius: 0 0 1vh 0 ;
 
         .col-md-2{
           margin-top: 10px;
@@ -263,13 +282,60 @@ body{
       }
     }
     .chatOutput{
-      .col-md-4{
+      .col-md-5{
+        width: 47.3vh;
         background-color: rgb(251, 215, 191);
         display: inline-block;
         vertical-align: middle;
-        height: 80vh;
-        border-radius: 1vh 1vh 0 0  ;
+        height: 45vh;
         overflow-y: scroll;
+        word-wrap:break-word;
+        #messages{
+          margin-top: 1vh
+        }
+      }
+    }
+  }
+  .point{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    .displayOrNotPoint{
+      float: right;
+      .row{
+        h1{
+          margin-right: 2vh;
+        }
+        .col-md-5{
+          border-radius: 1vh 1vh 0 0  ;
+          background-color: rgb(251, 215, 191);
+          width: 47.4vh;
+          border: 1px solid rgb(251, 215, 191);
+          margin-right: 1.4vh;
+          display: inline-block;
+          button{
+            background-color: white;
+            padding: 13px  13px 0 13px;
+            border-radius: 16px;
+            float: left;
+            margin-right: 1vh
+          }
+        }
+      }
+    }
+    .pointOutput{
+      float: right;
+      .col-md-5{
+        width: 47.3vh;
+        background-color: rgb(251, 215, 191);
+        display: inline-block;
+        vertical-align: middle;
+        height: 45vh;
+        overflow-y: scroll;
+        word-wrap:break-word;
+        #points{
+          margin-top: 1vh
+        }
       }
     }
   }

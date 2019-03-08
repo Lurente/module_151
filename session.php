@@ -8,6 +8,31 @@ session_start();
 
       require_once('includes/config.php');
 
+      if (isset($_GET['refreshonly']))
+        {
+          $allMsg = $db->query("SELECT message, pseudo FROM chat INNER JOIN compte ON chat.id_compte = compte.id_compte ORDER BY id_chat ASC");
+              while ($msg = $allMsg->fetch()) {
+                echo "<b>".$msg['pseudo'] . " : </b>";
+                echo $msg['message'];
+                echo "<br><br>";
+              }
+              if(isset($_POST['refreshChat'])){
+                try{
+                  $requete = "SELECT * FROM chat ORDER BY id_chat ASC";
+                  $refreshChat = $db->query($requete);
+
+                  $_SESSION['allMsg'] = $refreshChat;
+
+                }
+                catch(PDOException $e){
+                  die('Une erreur est survenue ! ' . $e->getMessage());
+                  echo "string";
+                }
+              }
+
+            die();
+        }
+
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -38,13 +63,21 @@ session_start();
             <!--/textAccueil-->
             <!--chat-->
               <div class="chat">
-                </form>
-                <h1>Chat</h1>
+                <div class="displayOrNotChat">
+                  <div class="row">
+                    <h1>Chat</h1>
+                    <div class="col-md-5" id="inputRadiusChange">
+                      <button title="réduire le chat" type="button" id="hideChat" onclick="hideChat()">&Hacek;</button>
+                      <button title="afficher le chat" style="display:none" type="button" id="showChat" onclick="showChat()">^</button >
+                    </div>
+                  </div>
+                </div>
                 <div class="container">
                   <div  class="chatOutput">
                     <div class="row">
-                      <div class="col-md-4">
+                      <div class="col-md-5" id="chatDisplay">
                         <div id="messages">
+
                           <?php
                             $allMsg = $db->query("SELECT message, pseudo FROM chat INNER JOIN compte ON chat.id_compte = compte.id_compte ORDER BY id_chat ASC");
                               while ($msg = $allMsg->fetch()) {
@@ -72,17 +105,18 @@ session_start();
                   </div>
                   <div class="chatInput">
                     <div class="row">
-                      <div class="col-md-4">
+                      <div class="col-md-5">
                         <div class="col-md-2">
                           <p>chat</p>
                         </div>
                         <div class="col-md-8">
                           <form id="sendChat" action="traitement.php" method="post">
                             <input type="text" id="chat" name="chat" value="">
+                            <input type="number" id="sendChat" value="1" hidden>
                           </form>
                         </div>
                         <div class="col-md-2">
-                          <input type="button" name="sendChat" id="envoi" value="chat">
+                          <input type="button" id="envoi" value="send">
                         </div>
                       </div>
                     </div>
@@ -90,40 +124,118 @@ session_start();
                 </div>
               </div>
             <!--/chat-->
+
+            <!--point-->
+              <div class="point">
+                <div class="displayOrNotPoint">
+                  <div class="row">
+                    <h1>Chat</h1>
+                    <div class="col-md-5">
+                      <button title="réduire le chat" type="button" id="hidePoint" onclick="hidePoint()">&Hacek;</button>
+                      <button title="afficher le chat" style="display:none" type="button" id="showPoint" onclick="showPoint()">^</button >
+                    </div>
+                  </div>
+                </div>
+                <div class="container">
+                  <div  class="pointOutput">
+                    <div class="row">
+                      <div class="col-md-5" id="pointDisplay">
+                        <div id="points">
+
+                          <?php
+                            $allMsg = $db->query("SELECT message, pseudo FROM chat INNER JOIN compte ON chat.id_compte = compte.id_compte ORDER BY id_chat ASC");
+                              while ($msg = $allMsg->fetch()) {
+                                echo "<b>".$msg['pseudo'] . " : </b>";
+                                echo $msg['message'];
+                                echo "<br><br>";
+                              }
+                              if(isset($_POST['refreshChat'])){
+                                try{
+                                  $requete = "SELECT * FROM chat ORDER BY id_chat ASC";
+                                  $refreshChat = $db->query($requete);
+
+                                  $_SESSION['allMsg'] = $refreshChat;
+
+                                }
+                                catch(PDOException $e){
+                                  die('Une erreur est survenue ! ' . $e->getMessage());
+                                  echo "string";
+                                }
+                              }
+                          ?>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <!--/point-->
           </div>
         <!--/gameBackground-->
       </div>
       <script type="text/javascript">
 
-        $('#envoi').click(function(){
+        $('#envoi').click(function(e){
+          e.preventDefault();
 
             var formCheck = true;
-
             var message = $('#chat').val();
+            var sendChat = $('#sendChat').val();
 
             if (document.getElementById('chat').value == '') {
       				formCheck = false;
       			}
 
+
+
             if (formCheck) {
               $.ajax({
                   url : "traitement.php", // on donne l'URL du fichier de traitement
                   type : "POST", // la requête est de type POST
-                  data : {message:message} // et on envoie nos données
+                  data : "message=" + message + "&sendChat=true",
+                           // et on envoie nos données
+                  success : function(html) {
+                        chatRefresh(); // data came back ok, so display it
+                        $('#chat').val('');
+                    }
               });
             }
         });
 
-        chatRefresh(20000);
+        setInterval(chatRefresh, 2000);
 
-        function chatRefresh(refreshTime) {
+        function chatRefresh() {
           $.ajax({
-            url: 'session.php',
+            url: 'session.php?refreshonly',
             type: 'POST',
-            success : function( html ) {
-              $('#messages').prepend( html ); // data came back ok, so display it
+            success : function(html) {
+              $('#messages').html(html); // data came back ok, so display it
               }
           });
+        }
+
+        function hideChat() {
+          document.getElementById('chatDisplay').style.display ="none";
+          document.getElementById('showChat').style.display ="block";
+          document.getElementById('hideChat').style.display ="none";
+        }
+
+        function showChat() {
+          document.getElementById('chatDisplay').style.display ="block";
+          document.getElementById('showChat').style.display ="none";
+          document.getElementById('hideChat').style.display ="block";
+        }
+
+        function hidePoint() {
+          document.getElementById('pointDisplay').style.display ="none";
+          document.getElementById('showPoint').style.display ="block";
+          document.getElementById('hidePoint').style.display ="none";
+        }
+
+        function showPoint() {
+          document.getElementById('pointDisplay').style.display ="block";
+          document.getElementById('showPoint').style.display ="none";
+          document.getElementById('hidePoint').style.display ="block";
         }
 
       </script>
