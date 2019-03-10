@@ -8,7 +8,7 @@ session_start();
 
       require_once('includes/config.php');
 
-      if (isset($_GET['refreshonly']))
+      if (isset($_GET['refreshonlyChat']))
         {
           $allMsg = $db->query("SELECT message, pseudo FROM chat INNER JOIN compte ON chat.id_compte = compte.id_compte ORDER BY id_chat ASC");
               while ($msg = $allMsg->fetch()) {
@@ -29,9 +29,20 @@ session_start();
                   echo "string";
                 }
               }
-
             die();
         }
+
+        if (isset($_GET['refreshonlyPoints']))
+          {
+            $allPoints = $db->query("SELECT points FROM points INNER JOIN compte ON points.id_compte = compte.id_compte ORDER BY points ASC");
+                while ($points = $allPoints->fetch()) {
+                  echo "<b>".$points['pseudo'] . " : </b>";
+                  echo $points['points'];
+                  echo "<br><br>";
+                }
+            $personalPoints = $_SESSION['points'];
+            echo "<p>Vos Points : $personalPoints place : $rank</p>";
+          }
 
 ?>
 <!DOCTYPE html>
@@ -56,49 +67,26 @@ session_start();
               <div class="textAccueil">
                   <?php
                   $usrname = isset($_SESSION['pseudo'])?$_SESSION['pseudo']:'';
-                  echo "<parameter id='pseudo' value=" . $usrname .">";
                   echo "Bienvenue dans votre session $usrname";
                   ?>
               </div>
             <!--/textAccueil-->
             <!--chat-->
               <div class="chat">
-                <div class="displayOrNotChat">
-                  <div class="row">
-                    <h1>Chat</h1>
-                    <div class="col-md-5" id="inputRadiusChange">
-                      <button title="réduire le chat" type="button" id="hideChat" onclick="hideChat()">&Hacek;</button>
-                      <button title="afficher le chat" style="display:none" type="button" id="showChat" onclick="showChat()">^</button >
+                  <div class="displayOrNotChat">
+                    <div class="row">
+                      <h1>Chat</h1>
+                      <div class="col-md-5" id="inputRadiusChange">
+                        <button title="réduire le chat" type="button" id="hideChat" onclick="hideChat()">&Hacek;</button>
+                        <button title="afficher le chat" style="display:none" type="button" id="showChat" onclick="showChat()">^</button >
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div class="container">
                   <div  class="chatOutput">
                     <div class="row">
                       <div class="col-md-5" id="chatDisplay">
                         <div id="messages">
 
-                          <?php
-                            $allMsg = $db->query("SELECT message, pseudo FROM chat INNER JOIN compte ON chat.id_compte = compte.id_compte ORDER BY id_chat ASC");
-                              while ($msg = $allMsg->fetch()) {
-                                echo "<b>".$msg['pseudo'] . " : </b>";
-                                echo $msg['message'];
-                                echo "<br><br>";
-                              }
-                              if(isset($_POST['refreshChat'])){
-                                try{
-                                  $requete = "SELECT * FROM chat ORDER BY id_chat ASC";
-                                  $refreshChat = $db->query($requete);
-
-                                  $_SESSION['allMsg'] = $refreshChat;
-
-                                }
-                                catch(PDOException $e){
-                                  die('Une erreur est survenue ! ' . $e->getMessage());
-                                  echo "string";
-                                }
-                              }
-                          ?>
                         </div>
                       </div>
                     </div>
@@ -121,55 +109,73 @@ session_start();
                       </div>
                     </div>
                   </div>
-                </div>
               </div>
             <!--/chat-->
-
-            <!--point-->
-              <div class="point">
-                <div class="displayOrNotPoint">
+            <!--game-->
+            <div class="game">
+              <div class="container">
+                <div class="gameDisplay">
                   <div class="row">
-                    <h1>Chat</h1>
-                    <div class="col-md-5">
-                      <button title="réduire le chat" type="button" id="hidePoint" onclick="hidePoint()">&Hacek;</button>
-                      <button title="afficher le chat" style="display:none" type="button" id="showPoint" onclick="showPoint()">^</button >
+                    <div class="frame" id="images">
+                    </div>
+                    <div class="question">
+                      Guess this picture's name
                     </div>
                   </div>
                 </div>
-                <div class="container">
+                <div class="choicesDisplay">
+                  <div class="row">
+                    <div class="col-md-4 firstChoice">
+                      <?php
+
+                      ?>
+                    </div>
+                    <div class="col-md-4 secondChoice">
+                      <?php
+
+                      ?>
+                    </div>
+                    <div class="col-md-4 thirdChoice">
+                      <?php
+
+                      ?>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--/game-->
+            <!--points-->
+              <div class="points">
+                  <div class="displayOrNotPoint">
+                    <div class="row">
+                      <h1>Points</h1>
+                      <div class="col-md-5">
+                        <button title="réduire l'affichage des points" type="button" id="hidePoint" onclick="hidePoint()">&Hacek;</button>
+                        <button title="afficher les points" style="display:none" type="button" id="showPoint" onclick="showPoint()">^</button >
+                      </div>
+                    </div>
+                  </div>
                   <div  class="pointOutput">
                     <div class="row">
                       <div class="col-md-5" id="pointDisplay">
                         <div id="points">
-
-                          <?php
-                            $allMsg = $db->query("SELECT message, pseudo FROM chat INNER JOIN compte ON chat.id_compte = compte.id_compte ORDER BY id_chat ASC");
-                              while ($msg = $allMsg->fetch()) {
-                                echo "<b>".$msg['pseudo'] . " : </b>";
-                                echo $msg['message'];
-                                echo "<br><br>";
-                              }
-                              if(isset($_POST['refreshChat'])){
-                                try{
-                                  $requete = "SELECT * FROM chat ORDER BY id_chat ASC";
-                                  $refreshChat = $db->query($requete);
-
-                                  $_SESSION['allMsg'] = $refreshChat;
-
-                                }
-                                catch(PDOException $e){
-                                  die('Une erreur est survenue ! ' . $e->getMessage());
-                                  echo "string";
-                                }
-                              }
-                          ?>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
+                  <div class="personalPoint">
+                    <div class="row">
+                      <div class="col-md-5">
+                        <div id="personalPoints">
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
               </div>
-            <!--/point-->
+              </div>
+            <!--/points-->
           </div>
         <!--/gameBackground-->
       </div>
@@ -185,8 +191,6 @@ session_start();
             if (document.getElementById('chat').value == '') {
       				formCheck = false;
       			}
-
-
 
             if (formCheck) {
               $.ajax({
@@ -206,13 +210,37 @@ session_start();
 
         function chatRefresh() {
           $.ajax({
-            url: 'session.php?refreshonly',
+            url: 'session.php?refreshonlyChat',
             type: 'POST',
             success : function(html) {
               $('#messages').html(html); // data came back ok, so display it
               }
           });
         }
+
+      /*
+
+      function loadImage() {
+        $.ajax({
+          url: 'session.php?loadImage',
+          type: 'POST',
+          success : function(html) {
+            $('#images').html(html); // data came back ok, so display it
+            }
+        });
+      }
+
+      setInterval(pointsRefresh, 2000);
+
+      function pointsRefresh() {
+          $.ajax({
+            url: 'session.php?refreshonlyPoints',
+            type: 'POST',
+            success : function(html) {
+              $('#points').html(html); // data came back ok, so display it
+              }
+          });
+        }*/
 
         function hideChat() {
           document.getElementById('chatDisplay').style.display ="none";

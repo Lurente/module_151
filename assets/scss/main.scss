@@ -217,124 +217,167 @@ body{
 .page-session{
 
   .gameBackground{
-    margin: 0;
-    padding: 0;
     height: 100vh;
-    background : url('../../images/town_map_default.png') no-repeat  center;
-  }
-
-  .chat{
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    .displayOrNotChat{
-      .row{
-        h1{
-          margin-left: 2vh;
+    .chat{
+      margin-left: 1.5vh;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      .displayOrNotChat{
+        .row{
+          h1{
+            margin-left: 2vh;
+          }
+          .col-md-5{
+            border-radius: 1vh 1vh 0 0  ;
+            background-color: rgb(251, 215, 191);
+            width: 47.3vh;
+            border: 1px solid rgb(251, 215, 191);
+            display: inline-block;
+            button{
+              background-color: white;
+              padding: 13px  13px 0 13px;
+              border-radius: 16px;
+              float: right;
+              margin-right: 1vh
+            }
+          }
         }
+      }
+      .chatInput{
+
         .col-md-5{
-          border-radius: 1vh 1vh 0 0  ;
-          background-color: rgb(251, 215, 191);
-          width: 47.4vh;
-          border: 1px solid rgb(251, 215, 191);
-          margin-left: 1.4vh;
+          width: 47.3vh;
+          background-color: rgb(232, 122, 51);
           display: inline-block;
-          button{
-            background-color: white;
-            padding: 13px  13px 0 13px;
-            border-radius: 16px;
+          vertical-align: middle;
+          height: 40px;
+
+          .col-md-2{
+            margin-top: 10px;
+
+            p{
+              margin: 0;
+            }
+
+            input{
+              height:25px
+            }
+
+          }
+
+          .col-md-8{
+            line-height: 30px;
+
+            input{
+              margin-top: 2px;
+              width: 100%
+            }
+          }
+        }
+      }
+      .chatOutput{
+        .col-md-5{
+          width: 47.3vh;
+          background-color: rgb(251, 215, 191);
+          display: inline-block;
+          vertical-align: middle;
+          height: 45vh;
+          overflow-y: scroll;
+          word-wrap:break-word;
+          #messages{
+            margin-top: 1vh
+          }
+        }
+      }
+    }
+    .game{
+      position: absolute;
+      left: 45.7vh;
+      top: 0;
+      .gameDisplay{
+        width: 103.6vh;
+        height: 85vh;
+        .frame{
+          margin: auto;
+          margin-top: 9vh;
+          width: 80vh;
+          height: 70vh;
+          border: 1px solid black;
+          background: url('../../images/spooky_spook.jpg') fixed center no-repeat;
+          background-size: cover;
+        }
+      }
+      .question{
+        margin-top: 2vh;
+        font-size: 28px;
+        text-align: center;
+      }
+      .choicesDisplay{
+        text-align: center;
+        .col-md-4{
+          border-radius: 1vh;
+          margin: 4vh 5.2vh 4vh 5.2vh ;
+          border: 1px solid black;
+          width: 25vh;
+          height: 7vh;
+        }
+      }
+    }
+    .points{
+      margin-right: 1.5vh;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      float: right;
+      .displayOrNotPoint{
+        float: right;
+        .row{
+          h1{
+          }
+          .col-md-5{
             float: right;
-            margin-right: 1vh
+            border-radius: 1vh 1vh 0 0  ;
+            background-color: rgb(251, 215, 191);
+            width: 47.3vh;
+            border: 1px solid rgb(251, 215, 191);
+            display: inline-block;
+            button{
+              background-color: white;
+              padding: 13px  13px 0 13px;
+              border-radius: 16px;
+              float: left;
+              margin-right: 1vh
+            }
           }
         }
       }
-    }
-    .chatInput{
-
-      .col-md-5{
-        width: 47.3vh;
-        background-color: rgb(232, 122, 51);
-        display: inline-block;
-        vertical-align: middle;
-        height: 40px;
-
-        .col-md-2{
-          margin-top: 10px;
-
-          p{
-            margin: 0;
-          }
-
-          input{
-            height:25px
-          }
-
-        }
-
-        .col-md-8{
-          line-height: 30px;
-
-          input{
-            margin-top: 2px;
-            width: 100%
-          }
-        }
-      }
-    }
-    .chatOutput{
-      .col-md-5{
-        width: 47.3vh;
-        background-color: rgb(251, 215, 191);
-        display: inline-block;
-        vertical-align: middle;
-        height: 45vh;
-        overflow-y: scroll;
-        word-wrap:break-word;
-        #messages{
-          margin-top: 1vh
-        }
-      }
-    }
-  }
-  .point{
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    .displayOrNotPoint{
-      float: right;
-      .row{
-        h1{
-          margin-right: 2vh;
-        }
+      .pointOutput{
         .col-md-5{
-          border-radius: 1vh 1vh 0 0  ;
+          float: right;
+          width: 47.3vh;
           background-color: rgb(251, 215, 191);
-          width: 47.4vh;
-          border: 1px solid rgb(251, 215, 191);
-          margin-right: 1.4vh;
           display: inline-block;
-          button{
-            background-color: white;
-            padding: 13px  13px 0 13px;
-            border-radius: 16px;
-            float: left;
-            margin-right: 1vh
+          vertical-align: middle;
+          height: 45vh;
+          overflow-y: scroll;
+          word-wrap:break-word;
+          #points{
+            margin-top: 1vh
           }
         }
       }
-    }
-    .pointOutput{
-      float: right;
-      .col-md-5{
-        width: 47.3vh;
-        background-color: rgb(251, 215, 191);
-        display: inline-block;
-        vertical-align: middle;
-        height: 45vh;
-        overflow-y: scroll;
-        word-wrap:break-word;
-        #points{
-          margin-top: 1vh
+      .personalPoint{
+
+        .col-md-5{
+          width: 47.3vh;
+          background-color: rgb(232, 122, 51);
+          display: inline-block;
+          vertical-align: middle;
+          height: 40px;
+          p{
+            margin-top: 10px
+          }
         }
       }
     }

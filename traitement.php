@@ -110,4 +110,46 @@
     }
   }
 
+  if(isset($_POST['sendPoints'])){
+    try
+    {
+      $id_compte =  $_SESSION['id_compte'];
+
+      $sendChat = $db->prepare("INSERT INTO points (points, id_compte) VALUES (:points, :id_compte)");
+      $sendChat->bindParam(":points", $points);
+      $sendChat->bindParam(":id_compte", $id_compte);
+      $sendChat->execute();
+
+    }
+    catch(PDOException $e){
+      die('Une erreur est survenue ! ' . $e->getMessage());
+    }
+  }
+
+  if (isset($_GET['loadImage']))
+    {
+      $numeroImage = rand (1, 10);
+      $loadImage = $db->prepare("SELECT * FROM images WHERE id_image=:id_image");
+      $loadImage->bindParam(":id_image", $numeroImage);
+      $loadImage->execute();
+
+      $curImg = $loadImage->fetch(PDO::FETCH_OBJ);
+
+      $imageId = $curImg->id_image;
+      $imageName = $curImg->nom;
+      $imageUrl = $curImg->url;
+
+      $updateImage = $db->prepare("INSERT INTO partie (current_image,current_image_url) VALUES :currentImage, :currentImageUrl");
+      $updateImage->bindParam(":currentImage", $imageName);
+      $updateImage->bindParam(":currentImageUrl", $imageUrl);
+      $updateImage->execute();
+
+      $currentImage = $db->query("SELECT current_image,current_image_url FROM partie");
+      $curPartie = $currentImage->fetch(PDO::FETCH_OBJ);
+      $currentImageUrl = $curPartie->current_image_url;
+      $currentImageName= $curPartie->current_image;
+
+      echo "<img src='$currentImageUrl'>";
+    }
+
 ?>

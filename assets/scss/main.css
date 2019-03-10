@@ -137,80 +137,44 @@ body {
     text-align: right; }
 
 .page-session .gameBackground {
-  margin: 0;
-  padding: 0;
-  height: 100vh;
-  background: url("../../images/town_map_default.png") no-repeat center; }
-.page-session .chat {
-  position: absolute;
-  bottom: 0;
-  left: 0; }
-  .page-session .chat .displayOrNotChat .row h1 {
-    margin-left: 2vh; }
-  .page-session .chat .displayOrNotChat .row .col-md-5 {
-    border-radius: 1vh 1vh 0 0;
-    background-color: #fbd7bf;
-    width: 47.4vh;
-    border: 1px solid #fbd7bf;
-    margin-left: 1.4vh;
-    display: inline-block; }
-    .page-session .chat .displayOrNotChat .row .col-md-5 button {
-      background-color: white;
-      padding: 13px  13px 0 13px;
-      border-radius: 16px;
-      float: right;
-      margin-right: 1vh; }
-  .page-session .chat .chatInput .col-md-5 {
-    width: 47.3vh;
-    background-color: #e87a33;
-    display: inline-block;
-    vertical-align: middle;
-    height: 40px; }
-    .page-session .chat .chatInput .col-md-5 .col-md-2 {
-      margin-top: 10px; }
-      .page-session .chat .chatInput .col-md-5 .col-md-2 p {
-        margin: 0; }
-      .page-session .chat .chatInput .col-md-5 .col-md-2 input {
-        height: 25px; }
-    .page-session .chat .chatInput .col-md-5 .col-md-8 {
-      line-height: 30px; }
-      .page-session .chat .chatInput .col-md-5 .col-md-8 input {
-        margin-top: 2px;
-        width: 100%; }
-  .page-session .chat .chatOutput .col-md-5 {
-    width: 47.3vh;
-    background-color: #fbd7bf;
-    display: inline-block;
-    vertical-align: middle;
-    height: 45vh;
-    overflow-y: scroll;
-    word-wrap: break-word; }
-    .page-session .chat .chatOutput .col-md-5 #messages {
-      margin-top: 1vh; }
-.page-session .point {
-  position: absolute;
-  bottom: 0;
-  right: 0; }
-  .page-session .point .displayOrNotPoint {
-    float: right; }
-    .page-session .point .displayOrNotPoint .row h1 {
-      margin-right: 2vh; }
-    .page-session .point .displayOrNotPoint .row .col-md-5 {
+  height: 100vh; }
+  .page-session .gameBackground .chat {
+    margin-left: 1.5vh;
+    position: absolute;
+    bottom: 0;
+    left: 0; }
+    .page-session .gameBackground .chat .displayOrNotChat .row h1 {
+      margin-left: 2vh; }
+    .page-session .gameBackground .chat .displayOrNotChat .row .col-md-5 {
       border-radius: 1vh 1vh 0 0;
       background-color: #fbd7bf;
-      width: 47.4vh;
+      width: 47.3vh;
       border: 1px solid #fbd7bf;
-      margin-right: 1.4vh;
       display: inline-block; }
-      .page-session .point .displayOrNotPoint .row .col-md-5 button {
+      .page-session .gameBackground .chat .displayOrNotChat .row .col-md-5 button {
         background-color: white;
         padding: 13px  13px 0 13px;
         border-radius: 16px;
-        float: left;
+        float: right;
         margin-right: 1vh; }
-  .page-session .point .pointOutput {
-    float: right; }
-    .page-session .point .pointOutput .col-md-5 {
+    .page-session .gameBackground .chat .chatInput .col-md-5 {
+      width: 47.3vh;
+      background-color: #e87a33;
+      display: inline-block;
+      vertical-align: middle;
+      height: 40px; }
+      .page-session .gameBackground .chat .chatInput .col-md-5 .col-md-2 {
+        margin-top: 10px; }
+        .page-session .gameBackground .chat .chatInput .col-md-5 .col-md-2 p {
+          margin: 0; }
+        .page-session .gameBackground .chat .chatInput .col-md-5 .col-md-2 input {
+          height: 25px; }
+      .page-session .gameBackground .chat .chatInput .col-md-5 .col-md-8 {
+        line-height: 30px; }
+        .page-session .gameBackground .chat .chatInput .col-md-5 .col-md-8 input {
+          margin-top: 2px;
+          width: 100%; }
+    .page-session .gameBackground .chat .chatOutput .col-md-5 {
       width: 47.3vh;
       background-color: #fbd7bf;
       display: inline-block;
@@ -218,7 +182,74 @@ body {
       height: 45vh;
       overflow-y: scroll;
       word-wrap: break-word; }
-      .page-session .point .pointOutput .col-md-5 #points {
+      .page-session .gameBackground .chat .chatOutput .col-md-5 #messages {
         margin-top: 1vh; }
+  .page-session .gameBackground .game {
+    position: absolute;
+    left: 45.7vh;
+    top: 0; }
+    .page-session .gameBackground .game .gameDisplay {
+      width: 103.6vh;
+      height: 85vh; }
+      .page-session .gameBackground .game .gameDisplay .frame {
+        margin: auto;
+        margin-top: 9vh;
+        width: 80vh;
+        height: 70vh;
+        border: 1px solid black;
+        background: url("../../images/spooky_spook.jpg") fixed center no-repeat;
+        background-size: cover; }
+    .page-session .gameBackground .game .question {
+      margin-top: 2vh;
+      font-size: 28px;
+      text-align: center; }
+    .page-session .gameBackground .game .choicesDisplay {
+      text-align: center; }
+      .page-session .gameBackground .game .choicesDisplay .col-md-4 {
+        border-radius: 1vh;
+        margin: 4vh 5.2vh 4vh 5.2vh;
+        border: 1px solid black;
+        width: 25vh;
+        height: 7vh; }
+  .page-session .gameBackground .points {
+    margin-right: 1.5vh;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    float: right; }
+    .page-session .gameBackground .points .displayOrNotPoint {
+      float: right; }
+      .page-session .gameBackground .points .displayOrNotPoint .row .col-md-5 {
+        float: right;
+        border-radius: 1vh 1vh 0 0;
+        background-color: #fbd7bf;
+        width: 47.3vh;
+        border: 1px solid #fbd7bf;
+        display: inline-block; }
+        .page-session .gameBackground .points .displayOrNotPoint .row .col-md-5 button {
+          background-color: white;
+          padding: 13px  13px 0 13px;
+          border-radius: 16px;
+          float: left;
+          margin-right: 1vh; }
+    .page-session .gameBackground .points .pointOutput .col-md-5 {
+      float: right;
+      width: 47.3vh;
+      background-color: #fbd7bf;
+      display: inline-block;
+      vertical-align: middle;
+      height: 45vh;
+      overflow-y: scroll;
+      word-wrap: break-word; }
+      .page-session .gameBackground .points .pointOutput .col-md-5 #points {
+        margin-top: 1vh; }
+    .page-session .gameBackground .points .personalPoint .col-md-5 {
+      width: 47.3vh;
+      background-color: #e87a33;
+      display: inline-block;
+      vertical-align: middle;
+      height: 40px; }
+      .page-session .gameBackground .points .personalPoint .col-md-5 p {
+        margin-top: 10px; }
 
 /*# sourceMappingURL=main.css.map */
