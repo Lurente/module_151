@@ -128,28 +128,65 @@
 
   if (isset($_GET['loadImage']))
     {
-      $numeroImage = rand (1, 10);
-      $loadImage = $db->prepare("SELECT * FROM images WHERE id_image=:id_image");
-      $loadImage->bindParam(":id_image", $numeroImage);
-      $loadImage->execute();
+      try
+        {
+        $numeroImage = rand (1, 10);
 
-      $curImg = $loadImage->fetch(PDO::FETCH_OBJ);
+        $loadImage = $db->prepare("SELECT * FROM images WHERE id_image=:id_image");
+        $loadImage->bindParam(":id_image", $numeroImage);
+        $loadImage->execute();
 
-      $imageId = $curImg->id_image;
-      $imageName = $curImg->nom;
-      $imageUrl = $curImg->url;
+        $curImg = $loadImage->fetch(PDO::FETCH_OBJ);
 
-      $updateImage = $db->prepare("INSERT INTO partie (current_image,current_image_url) VALUES :currentImage, :currentImageUrl");
-      $updateImage->bindParam(":currentImage", $imageName);
-      $updateImage->bindParam(":currentImageUrl", $imageUrl);
-      $updateImage->execute();
+        $imageId = $curImg->id_image;
+        $imageName = $curImg->nom;
+        $imageUrl = $curImg->url;
 
-      $currentImage = $db->query("SELECT current_image,current_image_url FROM partie");
-      $curPartie = $currentImage->fetch(PDO::FETCH_OBJ);
-      $currentImageUrl = $curPartie->current_image_url;
-      $currentImageName= $curPartie->current_image;
+        $insertImage = $db->prepare("INSERT INTO partie (current_image,current_image_url) VALUES :currentImage, :currentImageUrl");
+        $insertImage->bindParam(":currentImage", $imageName);
+        $insertImage->bindParam(":currentImageUrl", $imageUrl);
+        $insertImage->execute();
 
-      echo "<img src='$currentImageUrl'>";
+        $currentImage = $db->query("SELECT current_image,current_image_url FROM partie");
+        $curPartie = $currentImage->fetch(PDO::FETCH_OBJ);
+        $currentImageUrl = $curPartie->current_image_url;
+        $currentImageName= $curPartie->current_image;
+
+        echo "<img src='$currentImageUrl'>";
+      }
+      catch(PDOException $e){
+        die('Une erreur est survenue ! ' . $e->getMessage());
+      }
     }
+
+    if (isset($_GET['updateImage']))
+      {
+        try
+          {
+          $numeroImage = rand (1, 10);
+
+          $searchImage = $db->query("SELECT id_image FROM images WHERE id_image=:id_image");
+          $searchImage->bindParam(":id_image", $numeroImage);
+          $searchImage->execute();
+
+          $newImage = $searchImage->fetch(PDO::FETCH_OBJ);
+          $newImageName = $newImage->current_image;
+          $newImageUrl = $newImage->current_image_url;
+
+          $updateImage = $db->prepare("UPDATE partie SET current_image = :current_image, current_image_url =:current_image_url WHERE id_image=:id_image");
+          $updateImage->bindParam(":currentImage", $imageName);
+          $updateImage->bindParam(":currentImageUrl", $imageUrl);
+
+          $currentImage = $db->query("SELECT current_image,current_image_url FROM partie");
+          $curPartie = $currentImage->fetch(PDO::FETCH_OBJ);
+          $currentImageUrl = $curPartie->current_image_url;
+          $currentImageName= $curPartie->current_image;
+
+          echo "<img src='$currentImageUrl'>";
+        }
+        catch(PDOException $e){
+          die('Une erreur est survenue ! ' . $e->getMessage());
+        }
+      }
 
 ?>

@@ -218,18 +218,19 @@ session_start();
           });
         }
 
-      /*
 
-      function loadImage() {
-        $.ajax({
-          url: 'session.php?loadImage',
-          type: 'POST',
-          success : function(html) {
-            $('#images').html(html); // data came back ok, so display it
-            }
-        });
-      }
 
+        function loadImage() {
+          $.ajax({
+            url: 'traitement.php',
+            type: 'POST',
+            data : "loadImage=true",
+            success : function(html) {
+              $('#images').html(html); // data came back ok, so display it
+              }
+          });
+        }
+/*
       setInterval(pointsRefresh, 2000);
 
       function pointsRefresh() {
