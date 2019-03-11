@@ -20,33 +20,38 @@ session_start();
                 echo $msg['message'];
                 echo "<br><br>";
               }
-              if(isset($_POST['refreshChat'])){
-                try{
-                  $requete = "SELECT * FROM chat ORDER BY id_chat ASC";
-                  $refreshChat = $db->query($requete);
-
-                  $_SESSION['allMsg'] = $refreshChat;
-
-                }
-                catch(PDOException $e){
-                  die('Une erreur est survenue ! ' . $e->getMessage());
-                  echo "string";
-                }
-              }
             die();
         }
 
-        if (isset($_GET['refreshonlyPoints']))
+        if (isset($_GET['refreshGlobalPoints']))
           {
+            $rank = 1;
             $allPoints = $db->query("SELECT points, pseudo FROM points INNER JOIN compte ON points.id_compte = compte.id_compte ORDER BY points ASC");
                 while ($points = $allPoints->fetch()) {
+                  echo "<b>rang :</b> $rank ";
                   echo "<b>".$points['pseudo'] . " : </b>";
                   echo $points['points'];
-                  echo "<br><br>";
+                  echo "<br>";
+                  $rank ++;
                 }
-            $personalPoints = $_SESSION['points'];
-            echo "<p>Vos Points : $personalPoints place : $rank</p>";
+              die();
           }
+
+        if (isset($_GET['refreshPersonalPoints']))
+          {
+            $id_compte= $_SESSION['id_compte'];
+            $stmt = $db->prepare("SELECT points FROM points WHERE id_compte=:id_compte");
+            $stmt->bindParam(":id_compte", $id_compte);
+            $stmt->execute();
+
+            $curPnts = $stmt->fetch(PDO::FETCH_OBJ);
+            $personalPoints = $curPnts->points;
+
+            echo "<p>Vos Points : $personalPoints</p>";
+
+            die();
+          }
+
 
 ?>
 <!DOCTYPE html>
@@ -75,6 +80,13 @@ session_start();
                   ?>
               </div>
             <!--/textAccueil-->
+            <!--déconnexion-->
+              <div class="deconnexion">
+                <form class="" action="traitement.php" method="post">
+                  <input type="submit" name="disconnect" value="se déconnecter">
+                </form>
+              </div>
+            <!--/déconnexion-->
             <!--chat-->
               <div class="chat">
                   <div class="displayOrNotChat">
@@ -129,11 +141,13 @@ session_start();
                 </div>
                 <div class="enterChoices">
                   <div class="row">
-                    <div class="col-md-4">
-                      <?php
-
-                      ?>
-                    </div>
+                    <form class="answer" action="traitement.php" method="post">
+                      <input type="text" id="answer" name="answer" value="">
+                      <input type="number" id="compareAnswer" value="1" hidden>
+                    </form>
+                  </div>
+                  <div class="row">
+                      <input type="button" id="sendAnswer" value="send">
                   </div>
                 </div>
               </div>
@@ -162,7 +176,6 @@ session_start();
                     <div class="row">
                       <div class="col-md-5">
                         <div id="personalPoints">
-
                         </div>
                       </div>
                     </div>
@@ -180,7 +193,6 @@ session_start();
 
             var formCheck = true;
             var message = $('#chat').val();
-            var sendChat = $('#sendChat').val();
 
             if (document.getElementById('chat').value == '') {
       				formCheck = false;
@@ -190,8 +202,7 @@ session_start();
               $.ajax({
                   url : "traitement.php", // on donne l'URL du fichier de traitement
                   type : "POST", // la requête est de type POST
-                  data : "message=" + message + "&sendChat=true",
-                           // et on envoie nos données
+                  data : "message=" + message + "&sendChat=true",// et on envoie nos données
                   success : function(html) {
                         chatRefresh(); // data came back ok, so display it
                         $('#chat').val('');
@@ -200,7 +211,29 @@ session_start();
             }
         });
 
-        setInterval(chatRefresh, 2000);
+        $('#sendAnswer').click(function(e){
+          e.preventDefault();
+
+            var formCheck = true;
+            var answer = $('#answer').val();
+
+            if (document.getElementById('answer').value == '') {
+              formCheck = false;
+            }
+
+            if (formCheck) {
+              $.ajax({
+                  url : "traitement.php", // on donne l'URL du fichier de traitement
+                  type : "POST", // la requête est de type POST
+                  data : "answer=" + answer + "&compareAnswer=true",// et on envoie nos données
+                  success : function(html) {
+                        $('#answer').val('');
+                    }
+              });
+            }
+        });
+
+        setInterval(chatRefresh, 1000);
 
         function chatRefresh() {
           $.ajax({
@@ -225,18 +258,26 @@ session_start();
           });
         }
 
-      /*
-      setInterval(pointsRefresh, 2000);
+        setInterval(pointsRefresh, 1000);
 
-      function pointsRefresh() {
-          $.ajax({
-            url: 'session.php?refreshonlyPoints',
-            type: 'POST',
-            success : function(html) {
-              $('#points').html(html); // data came back ok, so display it
-              }
-          });
-        }*/
+        function pointsRefresh() {
+            $.ajax({
+              url: 'session.php?refreshGlobalPoints',
+              type: 'POST',
+              success : function(html) {
+                $('#points').html(html); // data came back ok, so display it
+                }
+            });
+            $.ajax({
+              url: 'session.php?refreshPersonalPoints',
+              type: 'POST',
+              success : function(html) {
+                $('#personalPoints').html(html); // data came back ok, so display it
+                }
+            });
+          }
+
+
 
         function hideChat() {
           document.getElementById('chatDisplay').style.display ="none";

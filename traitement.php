@@ -11,10 +11,7 @@
   $encryptedpassword = md5($password);
   $level = 'stdrUsr';
   $message = isset($_POST['message'])?$_POST['message']:'';
-
-  echo "<pre>";
-  print_r($_POST);
-  echo "</pre>";
+  $answer = isset($_POST['answer'])?$_POST['answer']:'';
 
   if(isset($_POST['signIn'])){
     try
@@ -39,16 +36,27 @@
       }elseif ($password != $confirmPassword){
         header('location:index.php?error=passwordNonSimilaire');
       }else{
-        $requete = $db->prepare("INSERT INTO compte (email, pseudo, password, level) VALUES (:email, :pseudo, :password, :level)" );
+        $createAccount = $db->prepare("INSERT INTO compte (email, pseudo, password, level) VALUES (:email, :pseudo, :password, :level)" );
 
-        $requete->bindParam(":email", $email);
-        $requete->bindParam(":pseudo", $pseudo);
-        $requete->bindParam(":password", $encryptedpassword);
-        $requete->bindParam(":level", $level);
+        $createAccount->bindParam(":email", $email);
+        $createAccount->bindParam(":pseudo", $pseudo);
+        $createAccount->bindParam(":password", $encryptedpassword);
+        $createAccount->bindParam(":level", $level);
+        $createAccount->execute();
 
-        $requete->execute();
-          echo $pseudo;
+        $select = $db->prepare("SELECT id_compte FROM compte WHERE pseudo=:pseudo");
+        $select->bindParam(":pseudo", $pseudo);
+        $select->execute();
+        $selectIdCompte = $select->fetch(PDO::FETCH_OBJ);
 
+        $id_compte = $selectIdCompte->id_compte;
+        $points = 0;
+
+        $newPlayer = $db->prepare("INSERT INTO points ( points, id_compte) VALUES (:points, :id_compte)" );
+      	$newPlayer->bindParam(':points', $points);
+        $newPlayer->bindParam(':id_compte', $id_compte);
+
+        $newPlayer->execute();
         header('location:index.php');
       }
 
@@ -110,26 +118,38 @@
     }
   }
 
-  if(isset($_POST['sendPoints'])){
-    try
+  if (isset($_POST['compareAnswer']))
     {
-      $id_compte =  $_SESSION['id_compte'];
+      try
+        {
+          $id_compte =  $_SESSION['id_compte'];
+          $imageName = $_SESSION['imageName'];
 
-      $sendChat = $db->prepare("INSERT INTO points (points, id_compte) VALUES (:points, :id_compte)");
-      $sendChat->bindParam(":points", $points);
-      $sendChat->bindParam(":id_compte", $id_compte);
-      $sendChat->execute();
+          if ($answer == $imageName) {
+            $getPoints = $db->prepare("SELECT points FROM points WHERE id_compte=:id_compte");
+            $getPoints->bindParam(":id_compte", $id_compte);
+            $getPoints->execute();
+            $curPnts = $getPoints->fetch(PDO::FETCH_OBJ);
+            $curentPoints = $curPnts ->points;
+            $curentPoints += 10;
 
+            $updatePoints = $db->prepare("UPDATE points SET points=:points WHERE id_compte=:id_compte");
+            $updatePoints->bindParam(":points", $curentPoints);
+            $updatePoints->bindParam(":id_compte", $id_compte);
+            $updatePoints->execute();
+            echo "$imageName $answer ";
+          }
+
+      }
+      catch(PDOException $e){
+        die('Une erreur est survenue ! ' . $e->getMessage());
+      }
     }
-    catch(PDOException $e){
-      die('Une erreur est survenue ! ' . $e->getMessage());
-    }
-  }
 
   if (isset($_POST['loadImage']))
     {
       try
-        { 
+        {
         $numeroImage = rand (1, 10);
 
         $loadImage = $db->prepare("SELECT * FROM images WHERE id_image=:id_image");
@@ -142,10 +162,20 @@
         $imageName = $curImg->nom;
         $imageUrl = $curImg->url;
 
+        $_SESSION['imageName'] = $imageName;
+
         echo "<img src='$imageUrl'>";
       }
       catch(PDOException $e){
         die('Une erreur est survenue ! ' . $e->getMessage());
       }
     }
+
+    if (isset($_POST['disconnect']))
+      {
+        session_destroy();
+        $_SESSION= array();
+
+        header('location:index.php');
+      }
 ?>

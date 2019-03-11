@@ -218,6 +218,27 @@ body{
 
   .gameBackground{
     height: 100vh;
+    .textAccueil{
+      background-color: rgb(251, 215, 191);
+      text-align: center;
+      border: 1px solid black;
+      border-radius: 1vh;
+      width: 40vh;
+      margin-top: 5vh;
+      margin-left: 5vh
+    }
+    .deconnexion{
+      input{
+          float: right;
+          background-color: rgb(251, 215, 191);
+          text-align: center;
+          border: 1px solid black;
+          border-radius: 1vh;
+          width: 20vh;
+          margin-top: -3vh;
+          margin-right: 5vh
+      }
+    }
     .chat{
       margin-left: 1.5vh;
       position: absolute;
@@ -304,8 +325,10 @@ body{
           width: 80vh;
           height: 70vh;
           border: 1px solid black;
-          background: url('../../images/spooky_spook.jpg') fixed center no-repeat;
-          background-size: cover;
+          img{
+            width: 79.8vh;
+            height: 69.8vh;
+          }
         }
       }
       .question{
@@ -314,13 +337,18 @@ body{
         text-align: center;
       }
       .enterChoices{
-        text-align: center;
-        .col-md-4{
+        display: inline-block;
+        #answer{
           border-radius: 1vh;
-          margin: 4vh 34vh ;
+          margin: 1vh 33vh ;
           border: 1px solid black;
+          font-size: 28px;
+          text-align: center;
           width: 40vh;
           height: 7vh;
+        }
+        #sendAnswer{
+          margin: 0 50vh ;
         }
       }
     }

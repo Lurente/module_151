@@ -138,6 +138,23 @@ body {
 
 .page-session .gameBackground {
   height: 100vh; }
+  .page-session .gameBackground .textAccueil {
+    background-color: #fbd7bf;
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 1vh;
+    width: 40vh;
+    margin-top: 5vh;
+    margin-left: 5vh; }
+  .page-session .gameBackground .deconnexion input {
+    float: right;
+    background-color: #fbd7bf;
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 1vh;
+    width: 20vh;
+    margin-top: -3vh;
+    margin-right: 5vh; }
   .page-session .gameBackground .chat {
     margin-left: 1.5vh;
     position: absolute;
@@ -196,21 +213,26 @@ body {
         margin-top: 9vh;
         width: 80vh;
         height: 70vh;
-        border: 1px solid black;
-        background: url("../../images/spooky_spook.jpg") fixed center no-repeat;
-        background-size: cover; }
+        border: 1px solid black; }
+        .page-session .gameBackground .game .gameDisplay .frame img {
+          width: 79.8vh;
+          height: 69.8vh; }
     .page-session .gameBackground .game .question {
       margin-top: 2vh;
       font-size: 28px;
       text-align: center; }
     .page-session .gameBackground .game .enterChoices {
-      text-align: center; }
-      .page-session .gameBackground .game .enterChoices .col-md-4 {
+      display: inline-block; }
+      .page-session .gameBackground .game .enterChoices #answer {
         border-radius: 1vh;
-        margin: 4vh 34vh;
+        margin: 1vh 33vh;
         border: 1px solid black;
+        font-size: 28px;
+        text-align: center;
         width: 40vh;
         height: 7vh; }
+      .page-session .gameBackground .game .enterChoices #sendAnswer {
+        margin: 0 50vh; }
   .page-session .gameBackground .points {
     margin-right: 1.5vh;
     position: absolute;
