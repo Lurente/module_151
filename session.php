@@ -8,6 +8,10 @@ session_start();
 
       require_once('includes/config.php');
 
+      if (!isset($_SESSION['pseudo'])) {
+        header('location:index.php');
+      }
+
       if (isset($_GET['refreshonlyChat']))
         {
           $allMsg = $db->query("SELECT message, pseudo FROM chat INNER JOIN compte ON chat.id_compte = compte.id_compte ORDER BY id_chat ASC");
@@ -34,7 +38,7 @@ session_start();
 
         if (isset($_GET['refreshonlyPoints']))
           {
-            $allPoints = $db->query("SELECT points FROM points INNER JOIN compte ON points.id_compte = compte.id_compte ORDER BY points ASC");
+            $allPoints = $db->query("SELECT points, pseudo FROM points INNER JOIN compte ON points.id_compte = compte.id_compte ORDER BY points ASC");
                 while ($points = $allPoints->fetch()) {
                   echo "<b>".$points['pseudo'] . " : </b>";
                   echo $points['points'];
@@ -59,7 +63,7 @@ session_start();
       <link rel="stylesheet" href="assets/scss/main.css">
       <link href="https://fonts.googleapis.com/css?family=Cabin+Sketch" rel="stylesheet">
     </head>
-    <body>
+    <body onload="loadImage()">
       <div class="page-session">
         <!--gameBackground-->
           <div class="gameBackground">
@@ -123,19 +127,9 @@ session_start();
                     </div>
                   </div>
                 </div>
-                <div class="choicesDisplay">
+                <div class="enterChoices">
                   <div class="row">
-                    <div class="col-md-4 firstChoice">
-                      <?php
-
-                      ?>
-                    </div>
-                    <div class="col-md-4 secondChoice">
-                      <?php
-
-                      ?>
-                    </div>
-                    <div class="col-md-4 thirdChoice">
+                    <div class="col-md-4">
                       <?php
 
                       ?>
@@ -218,7 +212,7 @@ session_start();
           });
         }
 
-
+        setInterval(loadImage, 10000);
 
         function loadImage() {
           $.ajax({
@@ -230,7 +224,8 @@ session_start();
               }
           });
         }
-/*
+
+      /*
       setInterval(pointsRefresh, 2000);
 
       function pointsRefresh() {

@@ -203,13 +203,13 @@ body {
       margin-top: 2vh;
       font-size: 28px;
       text-align: center; }
-    .page-session .gameBackground .game .choicesDisplay {
+    .page-session .gameBackground .game .enterChoices {
       text-align: center; }
-      .page-session .gameBackground .game .choicesDisplay .col-md-4 {
+      .page-session .gameBackground .game .enterChoices .col-md-4 {
         border-radius: 1vh;
-        margin: 4vh 5.2vh 4vh 5.2vh;
+        margin: 4vh 34vh;
         border: 1px solid black;
-        width: 25vh;
+        width: 40vh;
         height: 7vh; }
   .page-session .gameBackground .points {
     margin-right: 1.5vh;
