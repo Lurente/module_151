@@ -11,13 +11,15 @@
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <title>Doodle War - HOMEPAGE</title>
+      <title>CURSEDWAR - HOMEPAGE</title>
       <meta name="description" content="Description de la page" />
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
       <link rel="stylesheet" href="assets/scss/main.css">
       <link href="https://fonts.googleapis.com/css?family=Cabin+Sketch" rel="stylesheet">
+      <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+      <link rel="icon" href="images/favicon.ico" type="image/x-icon">
     </head>
     <body>
       <!--mainPage-->
@@ -27,37 +29,14 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <img src="images/doodle_war_logo.png" alt="logo Gameology" id="logo" >
+                            <img src="images/doodle_war_logo.png" alt="logo CURSEDWAR" id="logo" >
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="pageTitle">
-                                <h1>DOODLE WAR</h1>
+                                <h1>CURSEDWAR</h1>
                             </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="nav">
-                            <nav>
-                                <ul>
-                                    <li>
-                                        <a href="#" id="current" title="GAMEOLOGY homepage">HOME</a>
-                                    </li>
-                                    <li>
-                                        <a href="news.php" title="news and update notes">NEWS</a>
-                                    </li>
-                                    <li>
-                                        <a href="aboutme.php" title="Infos">ABOUT ME</a>
-                                    </li>
-                                    <li>
-                                        <a href="games.php" title="Game list">GAMES</a>
-                                    </li>
-                                    <li>
-                                        <a href="contact.php" title="Contact me !">CONTACT</a>
-                                    </li>
-                                </ul>
-                            </nav>
                         </div>
                     </div>
                 </div>
@@ -67,7 +46,7 @@
             <div class="introduction">
                 <div class="container">
                     <div class="row">
-                        <p>Welcome to <a href="#">DOODLE WAR </a>!</p> <br>
+                        <p>Welcome to <a href="#">CURSEDWAR </a>!</p> <br>
                         <p>Please Login or Sign-in</p>
                         <div class="connexion">
                           <div class="tab">
@@ -218,24 +197,8 @@
 
                       <!--#collumn-->
                       <div class="col-md-8">
-                        <div class="foot_nav">
-                          <ul>
-                              <li>
-                                  <a href="#" id="current" title="GAMEOLOGY homepage">HOME</a>
-                              </li>
-                              <li>
-                                  <a href="news.php" title="news and update notes">NEWS</a>
-                              </li>
-                              <li>
-                                  <a href="aboutme.php" title="Infos">ABOUT ME</a>
-                              </li>
-                              <li>
-                                  <a href="games.php" title="Game list">GAMES</a>
-                              </li>
-                              <li>
-                                  <a href="contact.php" title="Contact me !">CONTACT</a>
-                              </li>
-                          </ul>
+                        <div class="footerCenter">
+                          <p>CURSEDWAR</p>
                         </div>
                       </div>
                       <!--#collumn-->

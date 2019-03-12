@@ -26,7 +26,7 @@ session_start();
         if (isset($_GET['refreshGlobalPoints']))
           {
             $rank = 1;
-            $allPoints = $db->query("SELECT points, pseudo FROM points INNER JOIN compte ON points.id_compte = compte.id_compte ORDER BY points ASC");
+            $allPoints = $db->query("SELECT points, pseudo FROM points INNER JOIN compte ON points.id_compte = compte.id_compte ORDER BY points DESC");
                 while ($points = $allPoints->fetch()) {
                   echo "<b>rang :</b> $rank ";
                   echo "<b>".$points['pseudo'] . " : </b>";
@@ -60,13 +60,15 @@ session_start();
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <title>Doodle War - SESSION</title>
+      <title>CURSEDWAR - SESSION</title>
       <meta name="description" content="Description de la page" />
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
       <link rel="stylesheet" href="assets/scss/main.css">
       <link href="https://fonts.googleapis.com/css?family=Cabin+Sketch" rel="stylesheet">
+      <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+      <link rel="icon" href="images/favicon.ico" type="image/x-icon">
     </head>
     <body onload="loadImage()">
       <div class="page-session">
@@ -245,7 +247,7 @@ session_start();
           });
         }
 
-        setInterval(loadImage, 10000);
+        setInterval(loadImage, 20000);
 
         function loadImage() {
           $.ajax({

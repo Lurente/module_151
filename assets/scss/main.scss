@@ -8,7 +8,7 @@ body{
 
 
 }
-
+/*
 .nav{
    z-index: 999;
 
@@ -54,7 +54,7 @@ body{
           }
       }
    }
-}
+}*/
 
 .footer{
     padding-top: 30px;
@@ -85,31 +85,12 @@ body{
         text-align: center;
         margin: auto;
 
-        .foot_nav{
+        .footerCenter{
          line-height: 15vh;
          background-color: transparent;
-         text-align: left;
-
-           ul {
-             list-style: none;
-             margin: 0;
-             padding: 0;
-             text-align: center;
-
-               li {
-                 display: inline-block;
-
-                   a {
-                     font-size: 24px;
-                     margin-top: 9px;
-                     margin: 0 2vh;
-                     color: #000;
-                     text-decoration: none;
-                     line-height: inherit;
-                     display: block;
-                     text-align: center;
-                   }
-               }
+         text-align: center;
+           p{
+             font-size:28px;
            }
         }
     }
@@ -118,7 +99,8 @@ body{
 .page-homepage{
 
     .header{
-
+      
+      margin-bottom: 8vh;
         .col-md-12{
           text-align: center;
 
